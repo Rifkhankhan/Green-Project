@@ -13,26 +13,11 @@ export class AddtipPage implements OnInit {
 
   ngOnInit() {
   }
-  taskObj;
 
-   close(){
-     this.model.dismiss(this.taskObj);
-  }
+  
 
   submittedForm(form:NgForm)
   {
-    if(!form.valid)
-    {
-      return
-    }
-    this.taskObj = {
-      Title:form.value.title,
-      Subtitle:form.value.stitle,
-      information:form.value.discription
-    }
 
-
-
-    this.close()
   }
 }

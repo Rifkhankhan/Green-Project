@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
+import { Crop } from 'src/app/models/crop.model';
 import { CropTips } from '../models/croptips.models';
 
 @Injectable({
@@ -12,37 +13,45 @@ export class HomeService {
   constructor(private http:HttpClient) { }
 
   private _croptips = new BehaviorSubject([]);
-   crops = [
-    {
-      'name':'Onion',
-      'img':'assets/project_images/onion.jfif'
-    },
-    {
-      'name':'Carrot',
-      'img':'assets/project_images/carrot.jfif'
-    },
-    {
-      'name':'Ginger',
-      'img':'assets/project_images/ginger.jfif'
-    }
-    ,
-    {
-      'name':'Pottato',
-      'img':'assets/project_images/pottato.jfif'
-    },
-    {
-      'name':'Turmeric',
-      'img':'assets/project_images/turmeric.png'
-    },
-    {
-      'name':'Paddy',
-      'img':'assets/project_images/paddy.jpg'
-    }
-  ];
 
-  
+  private _crops = new BehaviorSubject<Crop[]>(
+    [
+      {
+        'name':'Onion',
+        'img':'assets/project_images/onion.jfif'
+      },
+      {
+        'name':'Carrot',
+        'img':'assets/project_images/carrot.jfif'
+      },
+      {
+        'name':'Ginger',
+        'img':'assets/project_images/ginger.jfif'
+      }
+      ,
+      {
+        'name':'Pottato',
+        'img':'assets/project_images/pottato.jfif'
+      },
+      {
+        'name':'Turmeric',
+        'img':'assets/project_images/turmeric.png'
+      },
+      {
+        'name':'Paddy',
+        'img':'assets/project_images/paddy.jpg'
+      }
+    ]
+  )
+
+
+
   private _cropDisease = new BehaviorSubject([]);
 
+  get AllCrops()
+  {
+    return this._crops.asObservable()
+  }
 
   get AllcropTips()
   {
@@ -60,8 +69,7 @@ export class HomeService {
           {
             tips.push({
               tipsId:key,
-              title:data[key].title,
-              subtitle:data[key].subtitle,
+
               information:data[key].information
             })
           }
@@ -76,8 +84,7 @@ export class HomeService {
   }
 
   addTips(
-    title:string,
-    subtitle:string,
+    name:string,
     information:string
   )
   {
@@ -85,8 +92,7 @@ export class HomeService {
     let genId:string;
     const newCropTip = {
       tipsId:Math.random().toString(),
-      title:title,
-      subtitle:subtitle,
+      name:name,
       information:information
     }
     return this.http.post<{name:string}>("https://greens9go-green-default-rtdb.firebaseio.com/croptips.json",{...newCropTip,tipsId:null}).pipe(
@@ -110,8 +116,7 @@ export class HomeService {
       map(data=>{
         return{
           cropTipId:cropTipId,
-          title:data.title,
-          subtitle:data.subtitle,
+          name:data.name,
           information:data.information
         }
       })
@@ -120,8 +125,7 @@ export class HomeService {
 
   updateTip(
     id:string,
-    title:string,
-    subtitle:string,
+    name:string,
     information:string
   )
   {
@@ -147,8 +151,7 @@ export class HomeService {
 
         updatedtips[index] = {
           tipsId:id,
-          title:title,
-          subtitle:subtitle,
+          name:name,
           information:information
         }
 
@@ -172,6 +175,81 @@ export class HomeService {
       })
     )
   }
+
+
+
+  private _showingTips = new BehaviorSubject([
+    "Carrots (Daucus carota) like a sun and light, well-drained soil. If your soil is stony,shallow or heavy clay, you may end up with stunted or forked carrots, so try short-rooted types or grow them in raised beds or containers. Carrots are drought resistant, so rarely need watering.",
+    "Carrots (Daucus carota) like a sun and light, well-drained soil. If your soil is stony,shallow or heavy clay, you may end up with stunted or forked carrots, so try short-rooted types or grow them in raised beds or containers. Carrots are drought resistant, so rarely need watering.",
+    "Carrots (Daucus carota) like a sun and light, well-drained soil. If your soil is stony,shallow or heavy clay, you may end up with stunted or forked carrots, so try short-rooted types or grow them in raised beds or containers. Carrots are drought resistant, so rarely need watering.",
+    "Carrots (Daucus carota) like a sun and light, well-drained soil. If your soil is stony,shallow or heavy clay, you may end up with stunted or forked carrots, so try short-rooted types or grow them in raised beds or containers. Carrots are drought resistant, so rarely need watering.",
+    "Carrots (Daucus carota) like a sun and light, well-drained soil. If your soil is stony,shallow or heavy clay, you may end up with stunted or forked carrots, so try short-rooted types or grow them in raised beds or containers. Carrots are drought resistant, so rarely need watering.",
+
+  ])
+
+
+  get Allcrops()
+  {
+    return this._crops.asObservable();
+  }
+
+  get AllSawTips()
+  {
+    return this._showingTips.asObservable()
+  }
+
+
+  addCrop(
+    name:string,
+    img:string,
+  )
+  {
+
+    let genId:string;
+
+    const newCrop = {
+      cropId:Math.random().toString(),
+      name:name,
+      img:img,
+    }
+
+    return this.Allcrops.pipe(
+      take(1),
+      tap(crops=>{
+        this._crops.next(crops.concat(newCrop))
+      })
+    )
+
+  }
+
+  getCrop(cropId:string)
+  {
+    return this.Allcrops.pipe(
+      take(1),
+      map(crops=>{
+        return {...crops.find(p=>p.name === cropId)}
+      })
+    )
+  }
+
+
+
+  updateCrop(id: string, name: string, img: string) {
+    return this.Allcrops.pipe(
+      take(1),
+      tap(crops => {
+        const updatedCropIndex = crops.findIndex(pl => pl.name === name);
+        const updatedCrops = [...crops];
+        const oldCrop = updatedCrops[updatedCropIndex];
+        updatedCrops[updatedCropIndex] = {
+          name:name,
+          img:oldCrop.img
+        };
+        this._crops.next(updatedCrops);
+      })
+    );
+  }
+
 
 
 

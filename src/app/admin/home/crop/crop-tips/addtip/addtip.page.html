@@ -1,8 +1,9 @@
 <ion-header>
   <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-back-button ></ion-back-button >
+    </ion-buttons>
     <ion-title >Add Tip</ion-title>
-    <ion-icon name="close" slot="end" (click)="close()" class="ion-padding"></ion-icon>
-
   </ion-toolbar>
 </ion-header>
 
@@ -14,33 +15,17 @@
           <ion-list>
             <ion-item>
               <ion-label  position="floating">
-                <h1>Title</h1>
+                <h1>Enter Crop Tip</h1>
               </ion-label>
-              <ion-input name="title" type="text" required   lines="none" ngModel #title="ngModel"></ion-input>
+              <ion-input name="information" type="text" required   lines="none" ngModel #information="ngModel"></ion-input>
             </ion-item>
-            <ion-item *ngIf="!title.valid && title.touched" lines="none">
-              <p>Please Enter the  Title</p>
+            <ion-item *ngIf="!information.valid && information.touched" lines="none">
+              <p>Please Enter the  information</p>
             </ion-item>
 
-            <ion-item>
-              <ion-label  position="floating">
-                <h1>Sub Title</h1>
-              </ion-label>
-              <ion-input name="stitle"  type="text" required   lines="none" ngModel #stitle="ngModel"></ion-input>
-            </ion-item>
-            <ion-item *ngIf="!stitle.valid && stitle.touched" lines="none">
-              <p>Please Enter the Sub Title</p>
-            </ion-item>
 
-            <ion-item>
-              <ion-label  position="floating">
-                <h1>Discribtion</h1>
-              </ion-label>
-              <ion-textarea name="discription" type="text" required   lines="none" ngModel #discription="ngModel"></ion-textarea>
-            </ion-item>
-            <ion-item *ngIf="!discription.valid && discription.touched" lines="none">
-              <p>Please Enter the Discription/p>
-            </ion-item>
+
+
               <ion-button type="submit" size="large" fill="solid"  expand="block" color="primary"  [disabled]="!formDetails.valid">Add Tip</ion-button>
           </ion-list>
         </form>

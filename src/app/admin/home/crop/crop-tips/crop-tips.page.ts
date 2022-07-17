@@ -38,38 +38,16 @@ export class CropTipsPage implements OnInit,OnDestroy{
     })
   }
 
-   addCropTips()
+  addCropTips()
   {
-      this.modelCtrl.create({
-        component: AddtipPage
-      }).then(el=>{
-        el.present();
-        return el.onDidDismiss()
-      }).then(data=>{
-
-          this.loadCtrl.create({
-            message:"Adding...",
-            duration:2000
-          }).then(el=>{
-            el.present()
-            this.homeService.addTips(
-              data.data.Title,
-              data.data.Subtitle,
-              data.data.information
-             ).subscribe(()=>{
-              el.dismiss()
-
-             })
-          })
-      })
-
+    
   }
 
-   close(){
-     this.modelCtrl.dismiss(this.taskObj);
-  }
 
-  taskObj;
+
+
+
+
 
 
   ngOnDestroy()
@@ -82,3 +60,4 @@ export class CropTipsPage implements OnInit,OnDestroy{
 
 
 }
+

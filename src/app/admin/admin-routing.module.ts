@@ -24,18 +24,7 @@ const routes: Routes = [
               },
               {
                 path:'crop-tips',
-                children:[
-                  {
-                    path:'',
-                    loadChildren: () => import('./home/crop/crop-tips/crop-tips.module').then( m => m.CropTipsPageModule)
-                  },
-                  {
-                    path:":id",
-                    loadChildren: () => import('./home/crop/crop-tips/croptipsdetails/croptipsdetails.module').then( m => m.CroptipsdetailsPageModule)
-
-                  }
-
-                ]
+                loadChildren: () => import('./home/crop/crop-tips/crop-tips.module').then( m => m.CropTipsPageModule)
               },
               {
                 path:'diseases',
@@ -44,11 +33,16 @@ const routes: Routes = [
               {
                 path:'animal-intervention',
                 loadChildren: () => import('./home/crop/animal-intervention/animal-intervention.module').then( m => m.AnimalInterventionPageModule)
+              },
+              {
+                path:"add-tips",
+                loadChildren: () => import('./home/crop/crop-tips/addtip/addtip.module').then( m => m.AddtipPageModule)
               }
 
 
             ]
           }
+
         ]
       },
       {
@@ -87,22 +81,7 @@ const routes: Routes = [
        }
     ]
   },
-  {
-    path: 'card',
-    loadChildren: () => import('./card/card.module').then( m => m.CardPageModule)
-  },
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
-  {
-    path: 'notification',
-    loadChildren: () => import('./notification/notification.module').then( m => m.NotificationPageModule)
-  },
-  {
-    path: 'profile',
-    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
-  },
+
 ];
 
 @NgModule({

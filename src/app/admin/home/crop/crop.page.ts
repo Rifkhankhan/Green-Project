@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { Crop } from 'src/app/models/crop.model';
+import { HomeService } from '../../service/home.service';
 
 @Component({
   selector: 'app-crop',
@@ -8,36 +11,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CropPage implements OnInit {
 
-  constructor(private Router:ActivatedRoute) { }
-  crops = [
-    {
-      'name':'Onion',
-      'img':'assets/project_images/onion.jfif'
-    },
-    {
-      'name':'Carrot',
-      'img':'assets/project_images/carrot.jfif'
-    },
-    {
-      'name':'Ginger',
-      'img':'assets/project_images/ginger.jfif'
-    }
-    ,
-    {
-      'name':'Pottato',
-      'img':'assets/project_images/pottato.jfif'
-    },
-    {
-      'name':'Turmeric', 
-      'img':'assets/project_images/turmeric.png'
-    },
-    {
-      'name':'Paddy',
-      'img':'assets/project_images/paddy.jpg'
-    }
-  ]
-  crop = {}
+
+  constructor(private Router:ActivatedRoute,private homeService: HomeService) { }
+  crop:Crop;
+  cropSub:Subscription
   ngOnInit() {
+
 
     this.Router.paramMap.subscribe(paramMap=>{
       if(!paramMap.has('cropId'))
@@ -45,7 +24,18 @@ export class CropPage implements OnInit {
         return;
       }
 
-      this.crop = this.crops.find(crop => crop.name === paramMap.get('cropId'));
+     this.cropSub = this.homeService.getCrop(paramMap.get('cropId')).subscribe(crop=>{
+        this.crop = crop
+
+     })
+
     });
+  }
+
+  ngOnDestroy(): void {
+      if(this.cropSub)
+      {
+        this.cropSub.unsubscribe()
+      }
   }
 }

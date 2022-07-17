@@ -1,6 +1,5 @@
 export class CropTips{
   tipsId:string;
-  title:string;
-  subtitle:string;
+  name:string;
   information:string;
 }
