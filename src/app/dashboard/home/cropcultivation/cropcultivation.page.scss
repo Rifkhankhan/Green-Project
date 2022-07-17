@@ -1,21 +1,27 @@
-
+*{
+  padding: 0%;
+  box-sizing: border-box;
+  padding: 0%;
+}
 .img
 {
-    padding: 0px;
-    margin: 0px;
-  
-    
+    padding: 0%;
+    margin: 0%;
+
     ion-img{
-        height: 300px;
-        padding: 0px;
-        margin: 0px;
-    
+      object-fit: cover;
+      width:auto;
+      padding: 0%;
+      margin: 0%;
+      height: 350px;
+
+
     }
-    
+
     ion-col
-    {    
-        padding: 0px;
-        margin: 0px;
+    {
+        padding: 0%;
+        margin: 0%;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -34,8 +40,9 @@
     }
     ion-img{
         height: 150px !important;
-        width: fit-content !important;
-        padding: 0px;
-        margin: 0px;
+        width: auto;
+        padding: 0%;
+        margin: 0%;
+        object-fit: cover;
     }
 }

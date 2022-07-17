@@ -28,7 +28,7 @@ export class CropPage implements OnInit {
       'img':'assets/project_images/pottato.jfif'
     },
     {
-      'name':'Turmeric',
+      'name':'Turmeric', 
       'img':'assets/project_images/turmeric.png'
     },
     {

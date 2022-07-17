@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { HomeService } from 'src/app/dashboard/home/HomeServices/home.service';
+import { Crop } from 'src/app/models/crop.model';
 
 @Component({
   selector: 'app-cropcultivation',
   templateUrl: './cropcultivation.page.html',
   styleUrls: ['./cropcultivation.page.scss'],
 })
-export class CropcultivationPage implements OnInit {
+export class CropcultivationPage implements OnInit,OnDestroy {
 
-  constructor(private Router:ActivatedRoute) { }
+  constructor(private Router:ActivatedRoute,private homeService: HomeService) { }
+  crop:Crop;
+  cropSub:Subscription
   ngOnInit() {
+
 
     this.Router.paramMap.subscribe(paramMap=>{
       if(!paramMap.has('cropId'))
@@ -17,37 +23,19 @@ export class CropcultivationPage implements OnInit {
         return;
       }
 
-      this.crop = this.crops.find(crop => crop.name === paramMap.get('cropId'));
+     this.cropSub = this.homeService.getCrop(paramMap.get('cropId')).subscribe(crop=>{
+        this.crop = crop
+
+     })
+
     });
   }
-  crops = [
-    {
-      'name':'Onion',
-      'img':'assets/project_images/onion.jfif'
-    },
-    {
-      'name':'Carrot',
-      'img':'assets/project_images/carrot.jfif'
-    },
-    {
-      'name':'Ginger',
-      'img':'assets/project_images/ginger.jfif'
-    }
-    ,
-    {
-      'name':'Pottato',
-      'img':'assets/project_images/pottato.jfif'
-    },
-    {
-      'name':'Turmeric',
-      'img':'assets/project_images/turmeric.png'
-    },
-    {
-      'name':'Paddy',
-      'img':'assets/project_images/paddy.jpg'
-    }
-  ]
-  crop = {}
 
+  ngOnDestroy(): void {
+      if(this.cropSub)
+      {
+        this.cropSub.unsubscribe()
+      }
+  }
 
 }

@@ -1,12 +1,50 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons defaultHref="/dashboard/tabs/home">
+    <ion-buttons defaultHref="/dashboard/tabs/home" slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>diseases</ion-title>
+    <ion-title>Diseases</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="img">
+        <ion-img [src]="crop.img"></ion-img>
+      </ion-col>
+    </ion-row>
 
+    <ion-row>
+      <ion-col class="img">
+        <ion-toolbar color="primary" class="sawbar">
+          <ion-title >Sowing Tips</ion-title>
+        </ion-toolbar>
+
+        <ion-card *ngFor="let saw of saws">
+          <ion-card-content>
+            {{saw}}
+          </ion-card-content>
+        </ion-card>
+
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col class="img">
+        <ion-toolbar color="danger" class="sawbar">
+          <ion-title >Tips For Choosing What to Grow</ion-title>
+        </ion-toolbar>
+
+        <ion-card *ngFor="let saw of saws">
+          <ion-card-content>
+            {{saw}}
+          </ion-card-content>
+        </ion-card>
+
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
 </ion-content>

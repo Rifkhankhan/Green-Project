@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Crop } from 'src/app/models/crop.model';
+import { HomeService } from './HomeServices/home.service';
 
 @Component({
   selector: 'app-home',
@@ -7,36 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePage implements OnInit {
 
-  constructor() { }
+  constructor(private homeService:HomeService) { }
 
-  crops = [
-    {
-      'name':'Onion',
-      'img':'assets/project_images/onion.jfif'
-    },
-    {
-      'name':'Carrot',
-      'img':'assets/project_images/carrot.jfif'
-    },
-    {
-      'name':'Ginger',
-      'img':'assets/project_images/ginger.jfif'
-    }
-    ,
-    {
-      'name':'Pottato',
-      'img':'assets/project_images/pottato.jfif'
-    },
-    {
-      'name':'Turmeric',
-      'img':'assets/project_images/turmeric.png'
-    },
-    {
-      'name':'Paddy',
-      'img':'assets/project_images/paddy.jpg'
-    }
-  ]
+  crops:Crop[];
+
+  cropsSub:Subscription;
+
   ngOnInit() {
+
+    this.cropsSub = this.homeService.Allcrops.subscribe(crops=>{
+      this.crops = crops
+    })
+
+
   }
 
 }

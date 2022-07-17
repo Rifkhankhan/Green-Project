@@ -12,6 +12,36 @@ export class HomeService {
   constructor(private http:HttpClient) { }
 
   private _croptips = new BehaviorSubject([]);
+   crops = [
+    {
+      'name':'Onion',
+      'img':'assets/project_images/onion.jfif'
+    },
+    {
+      'name':'Carrot',
+      'img':'assets/project_images/carrot.jfif'
+    },
+    {
+      'name':'Ginger',
+      'img':'assets/project_images/ginger.jfif'
+    }
+    ,
+    {
+      'name':'Pottato',
+      'img':'assets/project_images/pottato.jfif'
+    },
+    {
+      'name':'Turmeric',
+      'img':'assets/project_images/turmeric.png'
+    },
+    {
+      'name':'Paddy',
+      'img':'assets/project_images/paddy.jpg'
+    }
+  ];
+
+  
+  private _cropDisease = new BehaviorSubject([]);
 
 
   get AllcropTips()
