@@ -1,5 +1,4 @@
-export class Disease
-{
+export class Disease{
   diseaseId:string;
   name:string;
   title:string;

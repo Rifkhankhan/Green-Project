@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, Route, Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { HomeService } from 'src/app/admin/service/home.service';
 import { Crop } from 'src/app/models/crop.model';
@@ -13,8 +13,14 @@ import { Crop } from 'src/app/models/crop.model';
 })
 export class AddtipPage implements OnInit {
 
-  constructor(private model:ModalController,private route:ActivatedRoute,private homeService: HomeService,private router: Router) { }
+  constructor(
+    private loadCtrl:LoadingController,
+    private model:ModalController,
+    private route:ActivatedRoute,
+    private homeService: HomeService,
+    private router: Router) { }
 
+  isLoading = false
   crop:Crop;
   cropSub:Subscription
   ngOnInit() {
@@ -27,7 +33,6 @@ export class AddtipPage implements OnInit {
 
       this.cropSub = this.homeService.getCrop(paramMap.get('cropId')).subscribe(crop=>{
         this.crop = crop
-        console.log(crop);
 
       })
     })
@@ -38,9 +43,32 @@ export class AddtipPage implements OnInit {
 
   submittedForm(form:NgForm)
   {
-    this.cropSub = this.homeService.addTips(this.crop.name,form.value.information).subscribe(()=>{
-      this.router.navigate(['/admin','tabs','home'])
-    })
+    if(!form.valid)
+    {
+      return
+    }
+    else{
+      this.loadCtrl.create({
+        message:'Creating...',
+        animated:true,
+        backdropDismiss:false,
+        duration:2000,
+        spinner:'circles',
+        cssClass: 'custom-loading'
+
+      }).then(el=>{
+        el.present()
+
+          this.cropSub = this.homeService.addTips(this.crop.name,form.value.type,form.value.information).subscribe(()=>{
+            el.dismiss()
+            this.router.navigate(['/admin','tabs','home',this.crop.name,'crop-tips'])
+          })
+      })
+
+
+    }
+
+
   }
 
   ngOnDestroy()

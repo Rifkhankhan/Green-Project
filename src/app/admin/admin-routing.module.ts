@@ -37,6 +37,10 @@ const routes: Routes = [
               {
                 path:"add-tips",
                 loadChildren: () => import('./home/crop/crop-tips/addtip/addtip.module').then( m => m.AddtipPageModule)
+              },
+              {
+                path:"add-disease",
+                loadChildren: () => import('./home/crop/diseases/add-disease/add-disease.module').then( m => m.AddDiseasePageModule)
               }
 
 

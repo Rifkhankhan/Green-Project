@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: AnimalInterventionPage
+  },
+  {
+    path: 'add-intervention',
+    loadChildren: () => import('./add-intervention/add-intervention.module').then( m => m.AddInterventionPageModule)
   }
 ];
 

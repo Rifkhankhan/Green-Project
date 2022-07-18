@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AnimationController, LoadingController, ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { CropTips } from 'src/app/admin/models/croptips.models';
+import { Disease } from 'src/app/admin/models/disease.model';
 import { HomeService } from 'src/app/admin/service/home.service';
 import { Crop } from 'src/app/models/crop.model';
 
@@ -17,7 +18,7 @@ export class DiseasesPage implements OnInit {
     private modelCtrl: ModalController,private homeService:HomeService,private route:ActivatedRoute) { }
 
   tipSub:Subscription
-  cropTips:CropTips[];
+  diseases:Disease[];
   crop:Crop;
   isLoading = false
   cropSub:Subscription
@@ -41,22 +42,11 @@ export class DiseasesPage implements OnInit {
   ionViewWillEnter()
   {
     this.isLoading = true
-    this.tipSub = this.homeService.fetchAlltips(this.crop.name).subscribe(tips=>{
-      this.cropTips = tips
+    this.tipSub = this.homeService.fetchAllDisease(this.crop.name).subscribe(diseases=>{
+      this.diseases = diseases
       this.isLoading = false
     })
   }
-
-  addCropTips()
-  {
-
-  }
-
-
-
-
-
-
 
 
   ngOnDestroy()

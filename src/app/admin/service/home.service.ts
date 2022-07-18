@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
 import { Crop } from 'src/app/models/crop.model';
-import { Disease } from 'src/app/models/disease.model';
+import { Disease } from 'src/app/admin/models/disease.model';
 import { CropTips } from '../models/croptips.models';
 
 @Injectable({
@@ -77,6 +77,7 @@ export class HomeService {
             tips.push({
               tipsId:key,
               name:name,
+              type:data[key].type,
               information:data[key].information
             })
           }
@@ -91,10 +92,11 @@ export class HomeService {
   }
 
 
-  fetchAllDisease()
+  fetchAllDisease(name:string)
   {
-    return this.http.get<{[key:string]:Disease}>("https://greenproject-6f3b9-default-rtdb.firebaseio.com/cropdisease.json").pipe(
-      map(data=>{
+    return this.http.get<{[key:string]:Disease}>(`https://greenproject-6f3b9-default-rtdb.firebaseio.com/cropdisease.json?orderBy="name"&equalTo="${name}"`).pipe(
+    take(1),
+    map(data=>{
         const tips = [];
         for(const key in data)
         {
@@ -103,6 +105,7 @@ export class HomeService {
             tips.push({
               diseaseId:key,
               name:data[key].name,
+              title:data[key].title,
               information:data[key].information
             })
           }
@@ -118,6 +121,7 @@ export class HomeService {
 
   addTips(
     name:string,
+    type:string,
     information:string
   )
   {
@@ -126,6 +130,7 @@ export class HomeService {
     const newCropTip = {
       tipsId:Math.random().toString(),
       name:name,
+      type:type,
       information:information
     }
     return this.http.post<{name:string}>("https://greenproject-6f3b9-default-rtdb.firebaseio.com/croptips.json",{...newCropTip,tipsId:null}).pipe(
@@ -175,6 +180,7 @@ export class HomeService {
         return{
           cropTipId:cropTipId,
           name:data.name,
+          type:data.type,
           information:data.information
         }
       })
@@ -198,6 +204,7 @@ export class HomeService {
   updateTip(
     id:string,
     name:string,
+    type:string,
     information:string
   )
   {
@@ -224,6 +231,7 @@ export class HomeService {
         updatedtips[index] = {
           tipsId:id,
           name:name,
+          type:type,
           information:information
         }
 
@@ -238,6 +246,7 @@ export class HomeService {
   updateDisease(
     id:string,
     name:string,
+    title:string,
     information:string
   )
   {
@@ -248,7 +257,7 @@ export class HomeService {
       switchMap(disease=>{
         if(!disease || disease.length <=0)
         {
-          return this.fetchAllDisease();
+          return this.fetchAllDisease(name);
         }
         else
         {
@@ -264,6 +273,7 @@ export class HomeService {
         updatedtips[index] = {
           diseaseId:id,
           name:name,
+          title:title,
           information:information
         }
 

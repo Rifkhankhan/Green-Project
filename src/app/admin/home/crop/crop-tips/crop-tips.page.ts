@@ -25,6 +25,9 @@ export class CropTipsPage implements OnInit,OnDestroy{
   isLoading = false
   cropSub:Subscription
 
+  sowTips:CropTips[];
+  csowTips:CropTips[];
+
   ngOnInit() {
     this.isLoading = true
 
@@ -36,6 +39,7 @@ export class CropTipsPage implements OnInit,OnDestroy{
 
       this.cropSub = this.homeService.getCrop(paraMap.get('cropId')).subscribe(crop=>{
         this.crop = crop
+
       })
 
     })
