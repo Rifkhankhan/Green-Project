@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
 import { Crop } from 'src/app/models/crop.model';
-import { Disease } from 'src/app/admin/models/disease.model';
+import { Disease } from 'src/app/models/disease.model';
 import { CropTips } from '../models/croptips.models';
 
 @Injectable({
@@ -94,7 +94,7 @@ export class HomeService {
 
   fetchAllDisease(name:string)
   {
-    return this.http.get<{[key:string]:Disease}>(`https://greenproject-6f3b9-default-rtdb.firebaseio.com/cropdisease.json?orderBy="name"&equalTo="${name}"`).pipe(
+    return this.http.get<{[key:string]:Disease}>(`https://greenproject-6f3b9-default-rtdb.firebaseio.com/cropdisease.json?orderBy="cropName"&equalTo="${name}"`).pipe(
     take(1),
     map(data=>{
         const tips = [];
@@ -104,9 +104,11 @@ export class HomeService {
           {
             tips.push({
               diseaseId:key,
-              name:data[key].name,
-              title:data[key].title,
-              information:data[key].information
+              diseaseName:data[key].diseaseName,
+              aboutDisease:data[key].aboutDisease,
+              cropName:data[key].cropName,
+              remedyAction:data[key].remedyAction,
+              image:data[key].image
             })
           }
         }
@@ -147,16 +149,22 @@ export class HomeService {
   }
 
   addDisease(
-    name:string,
-    information:string
+    diseaseName:string,
+    aboutDisease:string,
+    cropName:string,
+    remedyAction:string,
+    image:string
   )
   {
 
     let genId:string;
     const newCropTip = {
       diseaseId:Math.random().toString(),
-      name:name,
-      information:information
+      diseaseName:diseaseName,
+      aboutDisease:aboutDisease,
+      cropName:cropName,
+      remedyAction:remedyAction,
+      image:image
     }
     return this.http.post<{name:string}>("https://greenproject-6f3b9-default-rtdb.firebaseio.com/cropdisease.json",{...newCropTip,diseaseId:null}).pipe(
       take(1),
@@ -194,8 +202,11 @@ export class HomeService {
       map(data=>{
         return{
           diseaseId:id,
-          name:data.name,
-          information:data.information
+          diseaseName:data.diseaseName,
+          aboutDisease:data.aboutDisease,
+          cropName:data.cropName,
+          remedyAction:data.remedyAction,
+          image:data.image
         }
       })
     )
@@ -243,47 +254,47 @@ export class HomeService {
     )
   }
 
-  updateDisease(
-    id:string,
-    name:string,
-    title:string,
-    information:string
-  )
-  {
+  // updateDisease(
+  //   id:string,
+  //   name:string,
+  //   title:string,
+  //   information:string
+  // )
+  // {
 
-    let updatedtips:Disease[];
-    return this.AllDiseases.pipe(
-      take(1),
-      switchMap(disease=>{
-        if(!disease || disease.length <=0)
-        {
-          return this.fetchAllDisease(name);
-        }
-        else
-        {
-          return of(disease)
-        }
-      }),
-      switchMap(disease=>{
-        const index = disease.findIndex(p=>p.tipsId === id)
-        const oldtip = disease[index]
+  //   let updatedtips:Disease[];
+  //   return this.AllDiseases.pipe(
+  //     take(1),
+  //     switchMap(disease=>{
+  //       if(!disease || disease.length <=0)
+  //       {
+  //         return this.fetchAllDisease(name);
+  //       }
+  //       else
+  //       {
+  //         return of(disease)
+  //       }
+  //     }),
+  //     switchMap(disease=>{
+  //       const index = disease.findIndex(p=>p.tipsId === id)
+  //       const oldtip = disease[index]
 
-        updatedtips = [...disease]
+  //       updatedtips = [...disease]
 
-        updatedtips[index] = {
-          diseaseId:id,
-          name:name,
-          title:title,
-          information:information
-        }
+  //       updatedtips[index] = {
+  //         diseaseId:id,
+  //         name:name,
+  //         title:title,
+  //         information:information
+  //       }
 
-        return this.http.put(`https://greenproject-6f3b9-default-rtdb.firebaseio.com/cropdisease/${id}.json`,{...updatedtips[index],diseaseId:null})
-      }),
-      tap(()=>{
-        this._cropdiseases.next(updatedtips)
-      })
-    )
-  }
+  //       return this.http.put(`https://greenproject-6f3b9-default-rtdb.firebaseio.com/cropdisease/${id}.json`,{...updatedtips[index],diseaseId:null})
+  //     }),
+  //     tap(()=>{
+  //       this._cropdiseases.next(updatedtips)
+  //     })
+  //   )
+  // }
 
   CancelTip(id:string)
   {

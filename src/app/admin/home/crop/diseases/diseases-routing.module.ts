@@ -11,6 +11,14 @@ const routes: Routes = [
   {
     path: 'add-disease',
     loadChildren: () => import('./add-disease/add-disease.module').then( m => m.AddDiseasePageModule)
+  },
+  {
+    path: 'remedy-disease',
+    loadChildren: () => import('./remedy-disease/remedy-disease.module').then( m => m.RemedyDiseasePageModule)
+  },
+  {
+    path: 'about-disease',
+    loadChildren: () => import('./about-disease/about-disease.module').then( m => m.AboutDiseasePageModule)
   }
 ];
 

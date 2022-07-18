@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary" >
     <ion-buttons slot="start">
-      <ion-back-button ></ion-back-button >
+      <ion-back-button [defaultHref]="['/admin','tabs','home',crop.name]"></ion-back-button >
     </ion-buttons>
     <ion-title>Green Live</ion-title>
   </ion-toolbar>
@@ -11,19 +11,30 @@
   <ion-grid *ngIf="!isLoading">
 
     <ion-row>
-      <ion-col class="img">
-        <ion-list *ngFor="let disease of diseases">
-          <ion-item>
-            <ion-title>
-              {{disease.title}}
-            </ion-title>
+      <ion-col >
+        <ion-list *ngFor="let disease of diseases" class="content">
+          <ion-card>
+            <ion-item class="image">
+              <ion-img [src]="disease.image"></ion-img>
+            </ion-item>
 
-            <ion-card>
-              <ion-card-content>
-                {{disease.information}}
-              </ion-card-content>
-            </ion-card>
-          </ion-item>
+            <ion-item class="title">
+              <ion-card-header>
+                <ion-card-title>
+                  <h1>
+                    {{disease.diseaseName}}
+                  </h1>
+                </ion-card-title>
+              </ion-card-header>
+            </ion-item>
+
+            <ion-item class="btns">
+              <ion-buttons>
+                <ion-button class="about" (click)="about()">About</ion-button>
+                <ion-button class="remedy" (click)="remedy()">Remedy</ion-button>
+              </ion-buttons>
+            </ion-item>
+          </ion-card>
         </ion-list>
       </ion-col>
     </ion-row>

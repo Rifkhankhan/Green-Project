@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-buttons defaultHref="/dashboard/tabs/home" slot="start">
-      <ion-back-button></ion-back-button>
+    <ion-buttons  slot="start">
+      <ion-back-button [defaultHref]="['/admin','tabs','home']"></ion-back-button>
     </ion-buttons>
     <ion-title>{{crop.name}}</ion-title>
   </ion-toolbar>

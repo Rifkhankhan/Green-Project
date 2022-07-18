@@ -28,7 +28,20 @@ const routes: Routes = [
               },
               {
                 path:'diseases',
-                loadChildren: () => import('./home/crop/diseases/diseases.module').then( m => m.DiseasesPageModule)
+                children:[
+                  {
+                    path:'',
+                    loadChildren: () => import('./home/crop/diseases/diseases.module').then( m => m.DiseasesPageModule)
+                  },
+                  {
+                    path:'about-disease',
+                    loadChildren: () => import('./home/crop/diseases/about-disease/about-disease.module').then( m => m.AboutDiseasePageModule)
+                  },
+                  {
+                    path:'remedy-disease',
+                    loadChildren: () => import('./home/crop/diseases/remedy-disease/remedy-disease.module').then( m => m.RemedyDiseasePageModule)
+                  }
+                ],
               },
               {
                 path:'animal-intervention',

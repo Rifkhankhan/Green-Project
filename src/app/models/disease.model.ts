@@ -1,7 +1,9 @@
 export class Disease
 {
   diseaseId:string;
-  name:string;
-  title:string;
-  information:string;
+  diseaseName:string;
+  aboutDisease:string;
+  cropName:string;
+  remedyAction:string;
+  image:string
 }
