@@ -9,6 +9,13 @@
 
 <ion-content >
   <ion-grid >
+
+    <ion-row>
+      <ion-col>
+        <ion-img [src]="crop.img"></ion-img>
+      </ion-col>
+    </ion-row>
+
     <ion-row >
       <ion-col>
         <form (ngSubmit)="submittedForm(formDetails)" #formDetails="ngForm">
@@ -17,10 +24,17 @@
               <ion-label  position="floating">
                 <h1>Enter Crop Tip</h1>
               </ion-label>
-              <ion-input name="information" type="text" required   lines="none" ngModel #information="ngModel"></ion-input>
+              <ion-textarea name="information" type="text" required   lines="none" ngModel #information="ngModel"></ion-textarea>
             </ion-item>
             <ion-item *ngIf="!information.valid && information.touched" lines="none">
               <p>Please Enter the  information</p>
+            </ion-item>
+
+            <ion-item>
+              <ion-select>
+                <ion-option value="Sowing_tips">Sowing tips</ion-option>
+                <ion-option value="Tips_for_choosing">Tips for choosing what to grow</ion-option>
+              </ion-select>
             </ion-item>
 
 

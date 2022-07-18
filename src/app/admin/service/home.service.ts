@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, of } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
 import { Crop } from 'src/app/models/crop.model';
+import { Disease } from 'src/app/models/disease.model';
 import { CropTips } from '../models/croptips.models';
 
 @Injectable({
@@ -13,6 +14,7 @@ export class HomeService {
   constructor(private http:HttpClient) { }
 
   private _croptips = new BehaviorSubject([]);
+  private _cropdiseases = new BehaviorSubject([]);
 
   private _crops = new BehaviorSubject<Crop[]>(
     [
@@ -46,7 +48,6 @@ export class HomeService {
 
 
 
-  private _cropDisease = new BehaviorSubject([]);
 
   get AllCrops()
   {
@@ -58,9 +59,15 @@ export class HomeService {
     return this._croptips.asObservable();
   }
 
-  fetchAlltips()
+  get AllDiseases()
   {
-    return this.http.get<{[key:string]:CropTips}>("https://greens9go-green-default-rtdb.firebaseio.com/croptips.json").pipe(
+    return this._cropdiseases.asObservable()
+  }
+
+  fetchAlltips(name:string)
+  {
+    return this.http.get<{[key:string]:CropTips}>(`https://greenproject-6f3b9-default-rtdb.firebaseio.com/croptips.json?orderBy="name"&equalTo="${name}"`).pipe(
+      take(1),
       map(data=>{
         const tips = [];
         for(const key in data)
@@ -69,7 +76,7 @@ export class HomeService {
           {
             tips.push({
               tipsId:key,
-
+              name:name,
               information:data[key].information
             })
           }
@@ -79,6 +86,32 @@ export class HomeService {
       }),
       tap(data=>{
         this._croptips.next(data)
+      })
+    )
+  }
+
+
+  fetchAllDisease()
+  {
+    return this.http.get<{[key:string]:Disease}>("https://greenproject-6f3b9-default-rtdb.firebaseio.com/cropdisease.json").pipe(
+      map(data=>{
+        const tips = [];
+        for(const key in data)
+        {
+          if(data.hasOwnProperty(key))
+          {
+            tips.push({
+              diseaseId:key,
+              name:data[key].name,
+              information:data[key].information
+            })
+          }
+        }
+
+        return tips
+      }),
+      tap(data=>{
+        this._cropdiseases.next(data)
       })
     )
   }
@@ -95,11 +128,10 @@ export class HomeService {
       name:name,
       information:information
     }
-    return this.http.post<{name:string}>("https://greens9go-green-default-rtdb.firebaseio.com/croptips.json",{...newCropTip,tipsId:null}).pipe(
+    return this.http.post<{name:string}>("https://greenproject-6f3b9-default-rtdb.firebaseio.com/croptips.json",{...newCropTip,tipsId:null}).pipe(
       take(1),
       switchMap(data=>{
         genId = data.name
-
         return this.AllcropTips
       }),
       tap(tips=>{
@@ -109,13 +141,53 @@ export class HomeService {
     )
   }
 
+  addDisease(
+    name:string,
+    information:string
+  )
+  {
+
+    let genId:string;
+    const newCropTip = {
+      diseaseId:Math.random().toString(),
+      name:name,
+      information:information
+    }
+    return this.http.post<{name:string}>("https://greenproject-6f3b9-default-rtdb.firebaseio.com/cropdisease.json",{...newCropTip,diseaseId:null}).pipe(
+      take(1),
+      switchMap(data=>{
+        genId = data.name
+
+        return this.AllcropTips
+      }),
+      tap(tips=>{
+        newCropTip.diseaseId = genId
+        this._croptips.next(tips)
+      })
+    )
+  }
+
   getTip(cropTipId:string)
   {
-    return this.http.get<CropTips>(`https://greens9go-green-default-rtdb.firebaseio.com/croptips/${cropTipId}.json`).pipe(
+    return this.http.get<CropTips>(`https://greenproject-6f3b9-default-rtdb.firebaseio.com/croptips/${cropTipId}.json`).pipe(
       take(1),
       map(data=>{
         return{
           cropTipId:cropTipId,
+          name:data.name,
+          information:data.information
+        }
+      })
+    )
+  }
+
+  getDisease(id:string)
+  {
+    return this.http.get<Disease>(`https://greenproject-6f3b9-default-rtdb.firebaseio.com/cropdisease/${id}.json`).pipe(
+      take(1),
+      map(data=>{
+        return{
+          diseaseId:id,
           name:data.name,
           information:data.information
         }
@@ -136,7 +208,7 @@ export class HomeService {
       switchMap(tips=>{
         if(!tips || tips.length <=0)
         {
-          return this.fetchAlltips();
+          return this.fetchAlltips(name);
         }
         else
         {
@@ -155,7 +227,7 @@ export class HomeService {
           information:information
         }
 
-        return this.http.put(`https://greens9go-green-default-rtdb.firebaseio.com/croptips/${id}.json`,{...updatedtips[index],tipsId:null})
+        return this.http.put(`https://greenproject-6f3b9-default-rtdb.firebaseio.com/croptips/${id}.json`,{...updatedtips[index],tipsId:null})
       }),
       tap(()=>{
         this._croptips.next(updatedtips)
@@ -163,15 +235,69 @@ export class HomeService {
     )
   }
 
+  updateDisease(
+    id:string,
+    name:string,
+    information:string
+  )
+  {
+
+    let updatedtips:Disease[];
+    return this.AllDiseases.pipe(
+      take(1),
+      switchMap(disease=>{
+        if(!disease || disease.length <=0)
+        {
+          return this.fetchAllDisease();
+        }
+        else
+        {
+          return of(disease)
+        }
+      }),
+      switchMap(disease=>{
+        const index = disease.findIndex(p=>p.tipsId === id)
+        const oldtip = disease[index]
+
+        updatedtips = [...disease]
+
+        updatedtips[index] = {
+          diseaseId:id,
+          name:name,
+          information:information
+        }
+
+        return this.http.put(`https://greenproject-6f3b9-default-rtdb.firebaseio.com/cropdisease/${id}.json`,{...updatedtips[index],diseaseId:null})
+      }),
+      tap(()=>{
+        this._cropdiseases.next(updatedtips)
+      })
+    )
+  }
+
   CancelTip(id:string)
   {
-    return this.http.delete(`https://greens9go-green-default-rtdb.firebaseio.com/croptips/${id}.json`).pipe(
+    return this.http.delete(`https://greenproject-6f3b9-default-rtdb.firebaseio.com/croptips/${id}.json`).pipe(
       take(1),
       switchMap(()=>{
         return this.AllcropTips;
       }),
       tap(tips=>{
         this._croptips.next( tips.filter( p =>p.cropId !==id));
+      })
+    )
+  }
+
+
+  CancelDisease(id:string)
+  {
+    return this.http.delete(`https://greenproject-6f3b9-default-rtdb.firebaseio.com/cropdisease/${id}.json`).pipe(
+      take(1),
+      switchMap(()=>{
+        return this.AllDiseases;
+      }),
+      tap(tips=>{
+        this._cropdiseases.next( tips.filter( p =>p.diseaseId !==id));
       })
     )
   }

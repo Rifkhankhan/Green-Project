@@ -67,7 +67,7 @@ export class HomeService {
 
   // fetchAllcrops()
   // {
-  //   return this.http.get<{[key:string]:CropTips}>("https://greens9go-green-default-rtdb.firebaseio.com/croptips.json").pipe(
+  //   return this.http.get<{[key:string]:CropTips}>("https://greenproject-6f3b9-default-rtdb.firebaseio.com/croptips.json").pipe(
   //     map(data=>{
   //       const tips = [];
   //       for(const key in data)
@@ -98,7 +98,7 @@ export class HomeService {
   {
 
     let genId:string;
-    
+
     const newCrop = {
       cropId:Math.random().toString(),
       name:name,
@@ -126,7 +126,7 @@ export class HomeService {
 
   // CancelTip(id:string)
   // {
-  //   return this.http.delete(`https://greens9go-green-default-rtdb.firebaseio.com/croptips/${id}.json`).pipe(
+  //   return this.http.delete(`https://greenproject-6f3b9-default-rtdb.firebaseio.com/croptips/${id}.json`).pipe(
   //     take(1),
   //     switchMap(()=>{
   //       return this.AllcropTips;

@@ -44,7 +44,7 @@ export class AuthService {
       role:'farmer'
     };
 
-    return  this.http.post<{name:string}>("https://greens9go-green-default-rtdb.firebaseio.com/users.json",{...newuser})
+    return  this.http.post<{name:string}>("https://greenproject-6f3b9-default-rtdb.firebaseio.com/users.json",{...newuser})
   }
 
   login(username:string,password:string)
