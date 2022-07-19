@@ -34,11 +34,11 @@ const routes: Routes = [
                     loadChildren: () => import('./home/crop/diseases/diseases.module').then( m => m.DiseasesPageModule)
                   },
                   {
-                    path:'about-disease',
+                    path:'about-disease/:diseaseId',
                     loadChildren: () => import('./home/crop/diseases/about-disease/about-disease.module').then( m => m.AboutDiseasePageModule)
                   },
                   {
-                    path:'remedy-disease',
+                    path:'remedy-disease/:diseaseId',
                     loadChildren: () => import('./home/crop/diseases/remedy-disease/remedy-disease.module').then( m => m.RemedyDiseasePageModule)
                   }
                 ],

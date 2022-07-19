@@ -44,7 +44,6 @@ export class DiseasesPage implements OnInit {
     this.isLoading = true
     this.tipSub = this.homeService.fetchAllDisease(this.crop.name).subscribe(diseases=>{
       this.diseases = diseases
-      console.log(diseases);
       console.log(this.crop.name);
 
 
@@ -52,14 +51,14 @@ export class DiseasesPage implements OnInit {
     })
   }
 
-  about()
+  about(id:string)
   {
-    this.router.navigate(['/admin','tabs','home',this.crop.name,'diseases','about-disease'])
+    this.router.navigate(['/admin','tabs','home',this.crop.name,'diseases','about-disease',id]);
   }
 
-  remedy()
+  remedy(id:string)
   {
-    this.router.navigate(['/admin','tabs','home',this.crop.name,'diseases','remedy-disease'])
+    this.router.navigate(['/admin','tabs','home',this.crop.name,'diseases','remedy-disease',id]);
 
   }
 
