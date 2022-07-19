@@ -13,8 +13,7 @@ export class RegisterPage implements OnInit {
 
   constructor(private authService:AuthService,private route:Router) { }
 
-  readonly url = "http://localhost:27017/users";
-  
+
   zones = [
     'jaffna',
     'colombo',
@@ -29,14 +28,14 @@ export class RegisterPage implements OnInit {
   submittedForm(form:NgForm)
   {
     if(!form.valid)
-    {      
+    {
       console.log('not');
-      
+
       return ;
     }
 
     console.log(form);
-    
+
     this.authService.logup(
       form.value.username,
       form.value.yourname,
@@ -50,5 +49,10 @@ export class RegisterPage implements OnInit {
     });
 
   }
+
+  
+
+
+
 
 }
