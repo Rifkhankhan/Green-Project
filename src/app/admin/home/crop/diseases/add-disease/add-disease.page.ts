@@ -61,32 +61,49 @@ export class AddDiseasePage implements OnInit {
     }
     else
     {
+
       let formdata = new FormData();
-      formdata.append('image',this.selectiveFile,this.selectiveFile.name);
 
+      if(form.value.image !== ''){
+          formdata.append('image',this.selectiveFile,this.selectiveFile.name);
 
-      // './assets/images/{}/event.target.files[0]
+          this.cropSub=this.homeService.addDisease(
+            form.value.disease,
+            form.value.adisease,
+            this.crop.name,
+            form.value.raction,
+            `../assets/project_images/Disease/${this.crop.name}/${this.selectiveFile.name}`,
 
-      this.loadCtrl.create({
-        message:"Creating...",
-        animated:true,
-        duration:2000,
-        spinner:'bubbles',
-      }).then(e=>{
-        e.present()
-
+          ).subscribe(()=>{
+            // e.dismiss()
+            this.router.navigate(["/admin",'tabs','home',this.crop.name,'diseases']);
+          })
+      }
+      else{
         this.cropSub=this.homeService.addDisease(
           form.value.disease,
           form.value.adisease,
           this.crop.name,
           form.value.raction,
-          `../assets/project_images/Disease/${this.crop.name}/${this.selectiveFile.name}`,
+          ``,
 
         ).subscribe(()=>{
-          e.dismiss()
-          this.router.navigate(["/admin",'tabs','home','diseases']);
+          // e.dismiss()
+          this.router.navigate(["/admin",'tabs','home',this.crop.name,'diseases']);
         })
-      })
+      }
+
+
+      // './assets/images/{}/event.target.files[0]
+
+      // this.loadCtrl.create({
+      //   message:"Creating...",
+      //   duration:1000,
+      //   spinner:'bubbles',
+      // }).then(e=>{
+      //   e.present()
+
+      // })
 
     }
 

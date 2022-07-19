@@ -22,7 +22,7 @@
 
           <ion-item>
             <ion-label position="floating">About The Disease</ion-label>
-            <ion-textarea name="adisease" type="text" ngModel #adisease="ngModel" required lines="none" rows="5"></ion-textarea>
+            <ion-textarea name="adisease" type="text" ngModel #adisease="ngModel"  lines="none" rows="5"></ion-textarea>
           </ion-item>
           <ion-item *ngIf="!adisease.valid && adisease.touched" lines="none">
             <p>Please Enter the About The Disease</p>
@@ -30,7 +30,7 @@
 
           <ion-item>
             <ion-label position="floating">Remedy Action</ion-label>
-            <ion-textarea name="raction" type="text" ngModel #raction="ngModel" required lines="none" rows="5"></ion-textarea>
+            <ion-textarea name="raction" type="text" ngModel #raction="ngModel"  lines="none" rows="5"></ion-textarea>
           </ion-item>
           <ion-item *ngIf="!raction.valid && raction.touched" lines="none">
             <p>Please Enter the Remedy Action</p>
@@ -40,7 +40,7 @@
           <ion-row>
             <ion-col size-md="8" offset-md="2">
               <ion-item>
-                <ion-input type="file" required ngModel  name="image" #image="ngModel" (change)="uploadfile($event)" ></ion-input>
+                <ion-input type="file"  ngModel  name="image" #image="ngModel" (change)="uploadfile($event)" ></ion-input>
               </ion-item>
               <ion-item *ngIf="!image.valid && image.touched" lines="none">
                 <ion-label>Image Should be Valided</ion-label>

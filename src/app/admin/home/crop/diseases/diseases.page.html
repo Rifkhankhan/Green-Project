@@ -14,8 +14,8 @@
       <ion-col >
         <ion-list *ngFor="let disease of diseases" class="content">
           <ion-card>
-            <ion-item class="image">
-              <ion-img [src]="disease.image"></ion-img>
+            <ion-item class="image" *ngIf="disease.image">
+              <ion-img [src]="disease.image" ></ion-img>
             </ion-item>
 
             <ion-item class="title">

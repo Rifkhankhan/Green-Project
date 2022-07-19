@@ -18,7 +18,7 @@
       </ion-card-header>
 
       <ion-card-content>
-        <ion-img [src]="disease.image"></ion-img>
+        <ion-img [src]="disease.image" *ngIf="disease.image"></ion-img>
         <p>{{disease.remedyAction}}</p>
       </ion-card-content>
     </ion-card>

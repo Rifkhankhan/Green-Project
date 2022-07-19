@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { CropTips } from 'src/app/admin/models/croptips.models';
 import { Crop } from 'src/app/models/crop.model';
 import { HomeService } from '../../HomeServices/home.service';
 
@@ -16,6 +17,8 @@ export class CropTipsPage implements OnInit {
   crop:Crop;
   saws = [];
   cropSub:Subscription
+  cropTips:CropTips[];
+  isLoading  = false
   ngOnInit() {
     this.route.paramMap.subscribe(paramMap=>{
       if(!paramMap.has('cropId'))
@@ -32,6 +35,15 @@ export class CropTipsPage implements OnInit {
       this.saws = saws
     })
 
+  }
+
+  ionViewWillEnter()
+  {
+    this.isLoading = true
+    this.cropSub = this.homeService.fetchAlltips(this.crop.name).subscribe(tips=>{
+      this.cropTips = tips
+      this.isLoading = false
+    })
   }
 
 }

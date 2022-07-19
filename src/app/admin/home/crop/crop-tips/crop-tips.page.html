@@ -33,7 +33,7 @@
     </ion-row>
 
 
-    <ion-row>
+    <ion-row *ngIf="crop.name !== 'Paddy'">
       <ion-col class="img">
         <ion-toolbar color="danger" class="sawbar">
           <ion-title >Tips For Choosing What to Grow</ion-title>
