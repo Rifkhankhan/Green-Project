@@ -21,11 +21,12 @@ export class RemedyDiseasePage implements OnInit,OnDestroy {
     disLoading = false;
     crop: Crop;
     diseaseSub: Subscription
+    paramSub: Subscription
     disease: Disease;
 
     ngOnInit() {
 
-      this.route.paramMap.subscribe(paramMap=>{
+      this.paramSub = this.route.paramMap.subscribe(paramMap=>{
         this.cisLoading = true
         this.disLoading = true
 
@@ -49,10 +50,11 @@ export class RemedyDiseasePage implements OnInit,OnDestroy {
 
     ngOnDestroy(): void {
 
-      if(this.cropSub || this.diseaseSub)
+      if(this.cropSub || this.diseaseSub || this.paramSub)
       {
         this.cropSub.unsubscribe()
         this.diseaseSub.unsubscribe()
+        this.paramSub.unsubscribe()
       }
     }
 }

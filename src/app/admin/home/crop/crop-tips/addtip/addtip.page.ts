@@ -23,9 +23,10 @@ export class AddtipPage implements OnInit {
   isLoading = false
   crop:Crop;
   cropSub:Subscription
+  paramSub:Subscription
   ngOnInit() {
 
-    this.cropSub = this.route.paramMap.subscribe(paramMap=>{
+    this.paramSub = this.route.paramMap.subscribe(paramMap=>{
       if(!paramMap.has('cropId'))
       {
         return
@@ -73,9 +74,10 @@ export class AddtipPage implements OnInit {
 
   ngOnDestroy()
   {
-    if(this.cropSub)
+    if(this.cropSub || this.paramSub)
     {
       this.cropSub.unsubscribe()
+      this.paramSub.unsubscribe()
     }
   }
 }

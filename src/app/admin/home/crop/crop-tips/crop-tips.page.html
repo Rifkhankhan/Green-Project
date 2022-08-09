@@ -5,10 +5,21 @@
     </ion-buttons>
     <ion-title>Green Live</ion-title>
   </ion-toolbar>
+
 </ion-header>
 
 <ion-content>
-  <ion-grid>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-grid *ngIf="!isLoading">
     <ion-row>
       <ion-col class="img">
         <ion-img [src]="crop.img"></ion-img>
@@ -33,21 +44,18 @@
     </ion-row>
 
 
-    <ion-row *ngIf="crop.name !== 'Paddy'">
+    <ion-row *ngIf="crop.name !== 'Paddy' && crop.name !== 'Pottato'">
       <ion-col class="img">
         <ion-toolbar color="danger" class="sawbar">
           <ion-title >Tips For Choosing What to Grow</ion-title>
         </ion-toolbar>
-        <ion-list *ngFor="let saw of cropTips"  >
+        <ion-list *ngFor="let saw of cropTips "  >
             <ion-card *ngIf="saw.type === 'Tips_for_choosing'">
               <ion-card-content>
                 {{saw.information}}
               </ion-card-content>
             </ion-card>
         </ion-list>
-
-
-
       </ion-col>
     </ion-row>
 

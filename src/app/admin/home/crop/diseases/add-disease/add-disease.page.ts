@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { LoadingController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,9 +12,10 @@ import { Disease } from 'src/app/models/disease.model';
   templateUrl: './add-disease.page.html',
   styleUrls: ['./add-disease.page.scss'],
 })
-export class AddDiseasePage implements OnInit {
+export class AddDiseasePage implements OnInit,OnDestroy {
 
   tipSub:Subscription
+  paramSub:Subscription
   diseases:Disease[];
   crop:Crop;
   isLoading = false
@@ -23,7 +24,7 @@ export class AddDiseasePage implements OnInit {
   constructor(private loadCtrl: LoadingController,private homeService: HomeService,private router:Router,private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(paramMap=>{
+    this.paramSub = this.route.paramMap.subscribe(paramMap=>{
       if(!paramMap.has('cropId'))
       {
         return
@@ -106,8 +107,12 @@ export class AddDiseasePage implements OnInit {
       // })
 
     }
+  }
 
-
-
+  ngOnDestroy(): void {
+      if(this.cropSub || this.paramSub){
+        this.cropSub.unsubscribe()
+        this.paramSub.unsubscribe()
+      }
   }
 }

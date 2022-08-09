@@ -17,6 +17,7 @@ export class AboutDiseasePage implements OnInit,OnDestroy {
     private homeService: HomeService
   ) { }
   cropSub: Subscription;
+  paramSub: Subscription;
   cisLoading = false;
   disLoading = false;
   crop: Crop;
@@ -25,7 +26,7 @@ export class AboutDiseasePage implements OnInit,OnDestroy {
 
   ngOnInit() {
 
-    this.route.paramMap.subscribe(paramMap=>{
+    this.paramSub = this.route.paramMap.subscribe(paramMap=>{
       this.cisLoading = true
       this.disLoading = true
 
@@ -49,10 +50,11 @@ export class AboutDiseasePage implements OnInit,OnDestroy {
 
   ngOnDestroy(): void {
 
-    if(this.cropSub || this.diseaseSub)
+    if(this.cropSub || this.diseaseSub ||this.paramSub)
     {
       this.cropSub.unsubscribe()
       this.diseaseSub.unsubscribe()
+      this.paramSub.unsubscribe()
     }
   }
 

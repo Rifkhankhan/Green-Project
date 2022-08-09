@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { AnimationController, LoadingController, ModalController } from '@ionic/angular';
+import { AnimationController, LoadingController, ModalController, SegmentChangeEventDetail } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { CropTips } from 'src/app/admin/models/croptips.models';
 import { HomeService } from 'src/app/admin/service/home.service';
@@ -27,7 +27,7 @@ export class CropTipsPage implements OnInit,OnDestroy{
 
   sowTips:CropTips[];
   csowTips:CropTips[];
-
+  Tips_for_choosing = 'Tips_for_choosing'
   ngOnInit() {
     this.isLoading = true
 
@@ -45,6 +45,23 @@ export class CropTipsPage implements OnInit,OnDestroy{
     })
   }
 
+  doRefresh(event)
+  {
+
+    setTimeout(() => {
+
+      this.isLoading = true;
+
+       this.isLoading = true
+        this.tipSub = this.homeService.fetchAlltips(this.crop.name).subscribe(tips=>{
+          this.cropTips = tips
+          this.isLoading = false
+        })
+      event.target.complete();
+    }, 2000);
+
+  }
+
   ionViewWillEnter()
   {
     this.isLoading = true
@@ -54,6 +71,17 @@ export class CropTipsPage implements OnInit,OnDestroy{
     })
   }
 
+  // type = 'sowing';
+  // segmentChanged(event:CustomEvent<SegmentChangeEventDetail>)
+  // {
+  //   if(event.detail.value === 'sowing')
+  //   {
+  //     this.type = 'sowing'
+  //   }
+  //   else{
+  //     this.type = 'tips_for_choosing'
+  //   }
+  // }
 
 
 
@@ -64,9 +92,10 @@ export class CropTipsPage implements OnInit,OnDestroy{
 
   ngOnDestroy()
   {
-    if(this.tipSub)
+    if(this.tipSub ||this.cropSub)
     {
       this.tipSub.unsubscribe()
+      this.cropSub.unsubscribe()
     }
   }
 

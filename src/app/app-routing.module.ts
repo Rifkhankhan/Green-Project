@@ -20,12 +20,12 @@ const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () => import('./dashboard/dashboard.module').then( m => m.DashboardPageModule),
-    canLoad:[AuthGuard]
+    // canLoad:[AuthGuard]
   },
   {
     path: 'admin',
     loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule),
-    canLoad:[AuthGuard]
+    // canLoad:[AuthGuard]
   },
 
 

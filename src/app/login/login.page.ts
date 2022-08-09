@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { AuthResponseData } from './auth.service';
 import { AlertController } from '@ionic/angular';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +18,7 @@ export class LoginPage implements OnInit {
   constructor(private router: Router,private loadingCtrl:LoadingController,
     private authService: AuthService,
     private alertCtrl: AlertController,
+    private useService:UserService
     ) { }
 
   isLoading = false;
@@ -39,15 +41,15 @@ export class LoginPage implements OnInit {
 
   submittedForm(form:NgForm)
   {
-    if(!form.valid)
-    {
-      return;
-    }
+    // if(!form.valid)
+    // {
+    //   return;
+    // }
 
     const email = form.value.email;
     const password = form.value.password;
-    this.authenticate(email,password);
 
+    // this.authenticate(email,password);
   }
 
   authenticate(email: string, password: string) {

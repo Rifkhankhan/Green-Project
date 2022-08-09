@@ -15,10 +15,11 @@ export class CropPage implements OnInit {
   constructor(private Router:ActivatedRoute,private homeService: HomeService) { }
   crop:Crop;
   cropSub:Subscription
+  paramSub:Subscription
   ngOnInit() {
 
 
-    this.Router.paramMap.subscribe(paramMap=>{
+    this.paramSub=this.Router.paramMap.subscribe(paramMap=>{
       if(!paramMap.has('cropId'))
       {
         return;
@@ -33,9 +34,10 @@ export class CropPage implements OnInit {
   }
 
   ngOnDestroy(): void {
-      if(this.cropSub)
+      if(this.cropSub || this,this.paramSub)
       {
         this.cropSub.unsubscribe()
+        this.paramSub.unsubscribe()
       }
   }
 }

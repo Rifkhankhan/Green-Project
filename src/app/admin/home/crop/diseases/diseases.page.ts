@@ -23,11 +23,12 @@ export class DiseasesPage implements OnInit {
   crop:Crop;
   isLoading = false
   cropSub:Subscription
+  paramSub:Subscription
 
   ngOnInit() {
     this.isLoading = true
 
-    this.route.paramMap.subscribe(paraMap=>{
+    this.paramSub = this.route.paramMap.subscribe(paraMap=>{
       if(!paraMap.has('cropId'))
       {
         return
@@ -65,9 +66,11 @@ export class DiseasesPage implements OnInit {
 
   ngOnDestroy()
   {
-    if(this.tipSub)
+    if(this.tipSub || this.paramSub || this.cropSub)
     {
       this.tipSub.unsubscribe()
+      this.cropSub.unsubscribe()
+      this.paramSub.unsubscribe()
     }
   }
 
