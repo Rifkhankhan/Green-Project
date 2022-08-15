@@ -74,7 +74,7 @@ export class UserService {
     };
 
     // this.authentication.signup().subscribe()
-    return  this.http.post<{name:string}>("https://greenproject-6f3b9-default-rtdb.firebaseio.com/users.json",{...newuser})
+    return  this.http.post<{name:string}>("https://greenproject-6f3b9-default-rtdb.firebaseio.com/users.json",{...newuser,userId:null})
   }
 
   login(username:string,password:string)

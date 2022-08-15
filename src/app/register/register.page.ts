@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Route, Router } from '@angular/router';
+import { AuthService } from '../login/auth.service';
 import {  UserService } from '../services/user.service';
 
 @Component({
@@ -10,7 +11,7 @@ import {  UserService } from '../services/user.service';
 })
 export class RegisterPage implements OnInit {
 
-  constructor(private userService:UserService,private route:Router) { }
+  constructor(private userService:UserService,private route:Router,private authService:AuthService) { }
 
 
   zones = [
@@ -35,7 +36,7 @@ export class RegisterPage implements OnInit {
 
     console.log(form);
 
-    this.userService.logup(
+    this.authService.signup(
       form.value.username,
       form.value.yourname,
       form.value.mobile,
@@ -44,7 +45,7 @@ export class RegisterPage implements OnInit {
       form.value.zone,
       form.value.password,
     ).subscribe(()=>{
-      
+
       this.route.navigateByUrl('/dashboard/tabs/home')
     });
 

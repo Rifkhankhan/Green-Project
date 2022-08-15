@@ -41,18 +41,18 @@ export class LoginPage implements OnInit {
 
   submittedForm(form:NgForm)
   {
-    // if(!form.valid)
-    // {
-    //   return;
-    // }
+    if(!form.valid)
+    {
+      return;
+    }
 
-    const email = form.value.email;
+    const userName = form.value.userName;
     const password = form.value.password;
 
-    // this.authenticate(email,password);
+    this.authenticate(userName,password);
   }
 
-  authenticate(email: string, password: string) {
+  authenticate(userName: string, password: string) {
     this.isLoading = true;
 
 
@@ -65,11 +65,7 @@ export class LoginPage implements OnInit {
 
         if(this.islogin)
         {
-          authObs=this.authService.login(email,password);
-        }
-        else
-        {
-          authObs=this.authService.signup(email, password)
+          authObs=this.authService.login(userName,password);
         }
           authObs.subscribe(
           resData => {
