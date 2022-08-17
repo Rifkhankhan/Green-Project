@@ -85,7 +85,10 @@ export class CropTipsPage implements OnInit,OnDestroy{
 
 
 
-
+  showPage()
+  {
+    
+  }
 
 
 

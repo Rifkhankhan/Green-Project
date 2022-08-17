@@ -14,19 +14,14 @@
                 <img src="assets/logo.png" alt="logo.png">
             </ion-item>
 
-            <ion-item>
-              <ion-input type="text" required  name="userName" lines="none" ngModel #name="ngModel" placeholder="User Name"></ion-input>
+            <ion-item lines="none">
+              <ion-input type="text" required  size="20"  name="userName"  ngModel #name="ngModel" placeholder="User Name"></ion-input>
             </ion-item>
-            <!-- <ion-item *ngIf="!name.valid && name.touched" lines="none">
-              <p>Please Enter the Valid Name</p>
-            </ion-item> -->
 
-            <ion-item>
-              <ion-input type="password"  minlength="6"   required password name="password" ngModel #password="ngModel" placeholder="Password"></ion-input>
+            <ion-item lines="none">
+              <ion-input type="password"  minlength="6" size="10"    required password name="password" ngModel #password="ngModel" placeholder="Password"></ion-input>
             </ion-item>
-            <!-- <ion-item *ngIf="!password.valid && password.touched" lines="none">
-              <p>Please Enter the Valid Password</p>
-            </ion-item> -->
+
 
             <ion-button type="submit" size="large" fill="solid"  expand="block" color="primary" >Login</ion-button>
             <ion-button type="button" size="large" fill="solid"  expand="block" color="success" routerLink="/register">Register</ion-button>

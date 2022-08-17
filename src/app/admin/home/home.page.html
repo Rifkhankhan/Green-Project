@@ -26,6 +26,7 @@
     <ion-row>
       <h2>Select Your Crops</h2>
     </ion-row>
+    
     <ion-row class="crop-card-row">
         <ion-col  size-sm="1" *ngFor="let crop of crops">
           <ion-card class="crop-card" [routerLink]="['/admin','tabs','home',crop.name]">
@@ -35,25 +36,7 @@
         </ion-col>
     </ion-row>
 
-    <ion-row >
-      <ion-col size="11.5">
-        <ion-item>
-          <ion-card class="search">
-            <ion-icon name="search"></ion-icon> <h2>If you Need More Crops Let's Find</h2>
-          </ion-card>
-        </ion-item>
-      </ion-col>
-    </ion-row>
 
-    <ion-row >
-      <ion-col size="11.5">
-        <ion-item>
-          <ion-card class="doubts">
-           <h2>To Clarify Your Doubts</h2>
-          </ion-card>
-        </ion-item>
-      </ion-col>
-    </ion-row>
 
   </ion-grid>
 
