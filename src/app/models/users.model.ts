@@ -1,15 +1,15 @@
 export class Users {
   constructor(
-   public userName:string,
-   public yourName:string,
-   public password:string,
-   public mobile:string,
-   public nic:string,
-   public role:string,
-   public address:string,
-   public registerd:string,
-   public token:string,
-   public userId:string,
-   public zone:string,
+    userId:string,
+    userName:string,
+    yourName:string,
+    password:string,
+    mobile:string,
+    nic:string,
+    role:string,
+    address:string,
+    registerd:string,
+    token:string,
+    zone:string,
   ) {}
 }

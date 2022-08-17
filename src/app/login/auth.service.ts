@@ -109,7 +109,7 @@ export class AuthService {
 		// });
 
 		return this.http
-			.get<{ [key: string]: Users }>(
+			.get(
 				`https://greenproject-6f3b9-default-rtdb.firebaseio.com/users.json?orderBy="username"&equalTo="${userName}"`
 			)
 			.pipe(
@@ -120,6 +120,7 @@ export class AuthService {
 						for (const key in data) {
 							if (data.hasOwnProperty(key)) {
 								if (this.decryptData(data[key].password) === password) {
+									localStorage.setItem('token', data[key].token);
 									user = {
 										userId: data[key].userId,
 										username: data[key].userName,
@@ -152,6 +153,7 @@ export class AuthService {
 	logout() {
 		// this._isAuthenticated = false
 		this._user.next(null);
+		localStorage.removeItem('token');
 		this.router.navigateByUrl('/auth');
 	}
 
@@ -252,5 +254,22 @@ export class AuthService {
 			// expirationTime.toISOString(),
 			// userData.email
 		);
+	}
+
+	getUser(token: string) {
+		let user = [];
+
+		return this.http
+			.get(
+				`https://greenproject-6f3b9-default-rtdb.firebaseio.com/users.json?orderBy="token"&equalTo="${token}"`
+			)
+			.pipe(
+				take(1),
+				map(resData => {
+					console.log(resData);
+
+					return resData;
+				})
+			);
 	}
 }

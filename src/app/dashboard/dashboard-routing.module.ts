@@ -91,6 +91,10 @@ const routes: Routes = [
         loadChildren: () => import('./card/card.module').then( m => m.CardPageModule)
       },
       {
+        path: 'reset-password',
+        loadChildren: () => import('./profile/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
+      },
+      {
         path: '',
         redirectTo: '/dashboard/tabs/home',
         pathMatch: 'full'
