@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+
+    </ion-buttons>
+    <ion-title>Notification</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid *ngIf="!isLoading && notifications.length === 0">
+    <p>There is no Notifications</p>
+  </ion-grid>
+
+  <ion-grid *ngIf="isLoading">
+    <p>Loading...</p>
+  </ion-grid>
+
+  <ion-grid *ngIf="!isLoading && notifications.length >0">
+    <ion-row>
+      <ion-col>
+        <ion-list *ngFor="let notification of notifications">
+          <ion-item >
+            <ion-label >
+              <ion-text class="date"> {{notification.date}} </ion-text>
+
+              <ion-text class="message"> {{notification.message}} </ion-text>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

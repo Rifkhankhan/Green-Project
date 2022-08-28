@@ -1,0 +1,50 @@
+*{
+  padding: 0%;
+  box-sizing: border-box;
+  padding: 0%;
+}
+.img
+{
+    padding: 0%;
+    margin: 0%;
+
+    ion-img{
+      margin-top: 5px !important;
+      width: 390px  !important;
+      object-fit: cover;
+      padding: 0%;
+      margin: 0%;
+      height: 350px;
+
+
+    }
+
+    ion-col
+    {
+        padding: 0%;
+        margin: 0%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+}
+
+.details
+{
+    text-align: center;
+    ion-card{
+        height: 200px;
+        width: 170px;
+        background-color: white;
+        border-radius: 5px;
+    }
+    ion-img{
+        height: 150px !important;
+        width: auto;
+        padding: 0%;
+        margin: 0%;
+        object-fit: cover;
+    }
+}

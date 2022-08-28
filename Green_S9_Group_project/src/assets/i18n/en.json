@@ -1,0 +1,77 @@
+{
+  "Dashboard": {
+    "Menu": {
+      "Home": "Home",
+      "Notification": "Notification",
+      "Card": "Card",
+      "Profile": "Profile",
+      "LogOut": "LogOut"
+    },
+    "Home": {
+      "title": "Home",
+      "Select_Your_Crops": "Select Your Crops",
+      "Onion": "Onion",
+      "Carrot": "Carrot",
+      "Ginger": "Ginger",
+      "Pottato": "Pottato",
+      "Turmeric": "Turmeric",
+      "Paddy": "Paddy",
+      "Today's_Report": "Today's Report",
+      "Sun": "Sun",
+      "Mon": "Mon",
+      "Wed": "Wed",
+      "Thu": "Thu",
+      "Fri": "Fri",
+      "Sat": "Sat",
+      "Maximum_Temp": "Maximum Temp",
+      "Manimum_Temp": "Manimum Temp",
+      "Humidity": "Humidity",
+      "Wind_Speed": "Wind Speed",
+      "Crops": {
+        "Onion": "Onion",
+        "Carrot": "Carrot",
+        "Ginger": "Ginger",
+        "Pottato": "Pottato",
+        "Turmeric": "Turmeric",
+        "Paddy": "Paddy"
+      }
+    },
+    "CropCultivation": {
+      "title": "Crop Cultivation",
+      "Fertilizer_Calculator": "Fertilizer Calculator",
+      "Crop_Tips": "Crop Tips",
+      "Diseases": "Diseases",
+      "Animal_Intervention": "Animal Intervention"
+    },
+    "CropTips": {
+      "title": {
+        "Onion": "Onion Tips",
+        "Carrot": "Carrot Tips",
+        "Ginger": "Ginger Tips",
+        "Pottato": "Pottato Tips",
+        "Turmeric": "Turmeric Tips",
+        "Paddy": "Paddy Tips"
+      }
+    },
+    "CropDiseases": {
+      "title": {
+        "Onion": "Onion Diseases",
+        "Carrot": "Carrot Diseases",
+        "Ginger": "Ginger Diseases",
+        "Pottato": "Pottato Diseases",
+        "Turmeric": "Turmeric Diseases",
+        "Paddy": "Paddy Diseases"
+      },
+      "Remedy": "Remedy",
+      "About": "About",
+      "DiseaseName": {
+        "DampingOff": "Damping Off",
+        "WhiteRot": "White Rot",
+        "PinkRootRot": "Pink Root Rot",
+        "BlackMould": "Black Mould",
+        "DownyMildew": "Downy Mildew",
+        "GreenMould": "Green Mould"
+      }
+    }
+  }
+}
