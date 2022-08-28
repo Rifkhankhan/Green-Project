@@ -5,7 +5,9 @@
         [defaultHref]="['/dashboard','tabs','home',crop.name]"
       ></ion-back-button>
     </ion-buttons>
-    <ion-title>{{"Dashboard.CropDiseases.title."+crop.name | translate}}</ion-title>
+    <ion-title
+      >{{"Dashboard.CropDiseases.title."+crop.name | translate}}</ion-title
+    >
   </ion-toolbar>
 </ion-header>
 
@@ -22,7 +24,10 @@
             <ion-item class="title">
               <ion-card-header>
                 <ion-card-title>
-                  <h1>{{"Dashboard.CropDiseases.DiseaseName."+disease.diseaseName | translate}}</h1>
+                  <h1>
+                    {{"Dashboard.CropDiseases.DiseaseName."+disease.diseaseName
+                    | translate}}
+                  </h1>
                 </ion-card-title>
               </ion-card-header>
             </ion-item>

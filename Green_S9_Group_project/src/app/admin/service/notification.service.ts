@@ -66,11 +66,11 @@ export class NotificationService {
 			message: message,
 			userId: userId,
 			reply: false,
-			date: JSON.stringify(new Date())
+			date: (new Date()).toISOString()
 		};
 
 		return this.http
-			.post<any>('http://localhost:5000/api/Notification', newNotification)
+			.post<any>('http://localhost:5000/api/Notification/create', newNotification)
 			.pipe(
 				take(1),
 				switchMap(res => {
@@ -94,7 +94,7 @@ export class NotificationService {
 					for (var notification in res) {
 						notifications.push({
 							notificationId: res[notification].id,
-							date: res[notification].date,
+							date:new Date( res[notification].date),
 							message: res[notification].message,
 							reply: res[notification].reply
 						});
@@ -119,7 +119,7 @@ export class NotificationService {
 
 					notifications.push({
 						notificationId: notification.id,
-						date: notification.date,
+						date: new Date(notification.date),
 						message: notification.message,
 						reply: notification.reply
 					});
