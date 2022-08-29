@@ -35,14 +35,14 @@ export class NotificationService {
 
 	deleteNotification(id: string) {
 		return this.http
-			.delete<any>('http://localhost:5000/api/crop/Notification/delete' + id)
+			.delete<any>('http://localhost:5000/api/Notification/delete/' + id)
 			.pipe(
 				take(1),
 				switchMap(() => {
 					return this.AllNotification;
 				}),
 				tap(notifications => {
-					this._notification.next(notifications);
+					this._notification.next(notifications.filter(n=>n.notificationId !== id));
 				})
 			);
 	}
@@ -66,7 +66,6 @@ export class NotificationService {
 			message: message,
 			userId: userId,
 			reply: false,
-			date: (new Date()).toISOString()
 		};
 
 		return this.http

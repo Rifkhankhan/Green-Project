@@ -11,7 +11,7 @@ const createNotification = async (req, res, next) => {
 
 	console.log(req.body);
 	const newNotification = new Notification({
-		date: req.body.date,
+		date: (new Date()).toISOString(),
 		userId: req.body.userId,
 		reply: req.body.reply,
 		message: req.body.message
@@ -129,6 +129,7 @@ const updateNotification = async (req, res, next) => {
 
 const deleteNotification = async (req, res, next) => {
 	const notificationId = req.params.notificationId;
+	console.log(notificationId);
 	let notification;
 	try {
 		notification = await Notification.findById(notificationId);
