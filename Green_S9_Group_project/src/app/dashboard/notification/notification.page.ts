@@ -92,7 +92,7 @@ export class NotificationPage implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy() {
-		if (this.notiSub|| this.deleteSub) {
+		if (this.notiSub || this.deleteSub) {
 			this.notiSub.unsubscribe;
 			this.deleteSub.unsubscribe;
 		}
