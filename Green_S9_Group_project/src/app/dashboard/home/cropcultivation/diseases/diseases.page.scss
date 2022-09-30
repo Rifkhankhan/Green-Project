@@ -18,6 +18,44 @@ ion-row
   text-align: center;
 }
 
-ion-card{
-  background-color: white;
-}
+.btns
+    {
+
+      ion-buttons{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        ion-button{
+          border-radius: 25px;
+          margin: 10px;
+          padding: 10px;
+          font-weight: 600;
+          height: 3rem;
+          width: 9rem;
+        }
+      }
+
+
+      .about{
+        background-color: blue;
+        color: white;
+      }
+
+      .about:active{
+        background-color: rgb(3, 3, 109);
+      }
+
+      .remedy{
+        background-color: rgb(49, 148, 49);
+        color: white;
+      }
+
+      .remedy:active{
+        background-color: rgb(3, 82, 3);
+      }
+    }
+    h1{
+      font-weight: 600;
+    }
+

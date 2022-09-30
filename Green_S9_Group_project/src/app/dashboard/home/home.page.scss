@@ -1,68 +1,104 @@
-.weather {
-  background-color: lightblue;
-  width: 500px;
-  height: 200px;
-  border-radius: 25px;
-  color: black;
-}
-
-ion-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-}
-
-.crop-card {
-  width: 100px;
-  height: 100px;
-  background-color: white;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  padding: 0px;
-}
-
-ion-col {
-  padding: 0px;
-  margin: 0px;
-  display: flex;
-  justify-content: center;
+ion-content{
+  --ion-background-color:#9FE6AF;
 }
 
 
-.crop-card {
-  width: 100px;
-  height: 150px;
-  text-align: center;
-  ion-img {
-    width: fit-content;
-    object-fit: cover;
-    height: 100px !important;
-  }
+ion-row{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
 
+.crop-card
+{
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 0px;
+}
+ion-col{
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    justify-content: center;
 }
 
 
+.crop-card
+{
+    width: 100px;
+    height: 130px;
+    text-align: center;
+    ion-img
+    {
+        width: fit-content;
+        height: 100px !important;
+    }
 
+}
 
-.weather-row {
-  ion-col {
-    ion-card {
+.search
+{
+    background-color: rgb(149, 149, 231);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-inline: 35px;
+    border-radius: 30px;
 
-      background-color: lightblue;
+    ion-icon{
+        font-size: 50px;
+        color: black;
+        float: left;
+        margin-right: 10px;
+    }
+    ion-card{
+        color: white;
+    }
+}
+.doubts
+{
+    background-color: white;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-inline: 65px;
+    border-radius: 30px;
+    margin-top: 10px;
+}
+
+.cardStyle{
+    border-radius: 20px;
+    --ion-background-color:#38bdf8;
+
+    span{
+      color: white;
+      font-weight: 300;
+    }
+
+    #temp{
+      font-weight: 300;
+      font-size: 4em;
+      margin: 5px;
+    }
+
+    #locationIcon{
+      color:#f6b844;
+      font-size: 2em;
+    }
+    #date{
+      color:white;
+      font-weight: 100;
     }
   }
-}
 
-
-.crop-card-row {
-  padding: 0% !important;
-  margin: 0% !important;
-
-  ion-col {
-    ion-card-title {
-      font-size: 15px auto !important;
-    }
-  }
+h2{
+  font-size: 1.4rem;
+  font-weight: 550;
 }
 

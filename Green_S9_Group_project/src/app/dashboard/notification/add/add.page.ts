@@ -19,6 +19,7 @@ export class AddPage implements OnInit, OnDestroy {
 
 	authSub: Subscription;
 	userId: string;
+
 	ngOnInit() {
 		this.authSub = this.authService.getUserId.subscribe(userId => {
 			this.userId = userId;
@@ -26,6 +27,7 @@ export class AddPage implements OnInit, OnDestroy {
 	}
 
 	sub: Subscription;
+
 
 	SubmittedForm(form: NgForm) {
 		if (!form.valid) {

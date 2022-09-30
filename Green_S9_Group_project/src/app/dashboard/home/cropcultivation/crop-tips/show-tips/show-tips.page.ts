@@ -7,7 +7,8 @@ import {
 } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { CropTips } from 'src/app/admin/models/croptips.models';
-import { HomeService } from 'src/app/admin/service/home.service';
+import { HomeService } from '../../../HomeServices/home.service';
+
 import { Crop } from 'src/app/models/crop.model';
 
 @Component({
@@ -25,7 +26,7 @@ export class ShowTipsPage implements OnInit, OnDestroy {
 	) {}
 
 	tipidSub: Subscription;
-	cropTip: CropTips;
+	cropTip: any;
 	isLoading = false;
 	cropTipSub: Subscription;
 

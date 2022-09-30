@@ -42,6 +42,7 @@
       "Crop_Tips": "பயிர் குறிப்புகள்",
       "Diseases": "நோய்கள்",
       "Animal_Intervention": "விலங்கு தலையீடு"
+
     },
     "CropTips": {
       "title": {
@@ -72,6 +73,7 @@
         "DownyMildew": "பூஞ்சை காளான்",
         "GreenMould": "பச்சை அச்சு"
       }
+
     }
   }
 }

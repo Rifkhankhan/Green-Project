@@ -14,6 +14,7 @@ import { NotificationPage } from './notification.page';
     FormsModule,
     IonicModule,
     NotificationPageRoutingModule
+
   ],
   declarations: [NotificationPage]
 })

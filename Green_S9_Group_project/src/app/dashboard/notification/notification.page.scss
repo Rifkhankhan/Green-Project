@@ -1,25 +1,28 @@
-ion-content {
-  ion-grid {
-    ion-row {
-      ion-col {
+* {
+  margin: 0%;
+  padding: 0%;
+}
 
-        background: rgb(160, 208, 65) !important;
-      }
+ion-card {
+  height:  auto;
+  margin-top: 0.6rem;
+  background-color: white;
+  margin-inline: 0.5rem;
+  box-shadow: 0px 0px 10px black;
+
+  ion-card-header {
+
+    display: flex;
+    justify-content: end;
+    ion-card-title {
+      margin-top: 0.2rem;
+      margin-right: 0.2rem;
+      font-size: medium;
     }
   }
-}
 
-ion-item {
-  .div {
-    display: flex;
-    flex-direction: column;
-
+  ion-card-content {
+    font-size: x-large;
+    padding: 0.5rem;
   }
-
-}
-
-
-.date {
-  text-align: right;
-
 }

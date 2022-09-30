@@ -1,11 +1,11 @@
-import { PopoverPage } from './../../popover/popover.page';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { PopoverController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { HomeService } from 'src/app/dashboard/home/HomeServices/home.service';
 import { Crop } from 'src/app/models/crop.model';
-import { PopoverController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
+import { PopoverPage } from '../../popover/popover.page';
 
 @Component({
 	selector: 'app-cropcultivation',
@@ -50,7 +50,6 @@ export class CropcultivationPage implements OnInit, OnDestroy {
 		});
 	}
 
-
 	async openLanguagePopover(event: Event) {
 		const popover = await this.popoverCtrl.create({
 			component: PopoverPage,
@@ -59,7 +58,6 @@ export class CropcultivationPage implements OnInit, OnDestroy {
 
 		await popover.present();
 	}
-
 	ngOnDestroy(): void {
 		if (this.cropSub || this.idSub) {
 			this.cropSub.unsubscribe();

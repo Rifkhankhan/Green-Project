@@ -8,6 +8,7 @@
 </ion-header>
 
 <ion-content >
+
   <ion-grid>
     <div *ngIf="isLoading">
       <ion-spinner></ion-spinner>
@@ -44,6 +45,7 @@
         </ion-item>
         <ion-item *ngIf="!reactiveform.get('email').valid && reactiveform.get('email').touched" lines="none">
           <ion-label>Shop Name Should be Valided</ion-label>
+
         </ion-item>
       </form>
     </ion-col>

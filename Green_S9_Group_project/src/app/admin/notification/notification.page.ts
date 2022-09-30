@@ -2,6 +2,7 @@ import { NotificationService } from 'src/app/admin/service/notification.service'
 import { Subscription } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
+
 @Component({
 	selector: 'app-notification',
 	templateUrl: './notification.page.html',
@@ -17,6 +18,7 @@ export class NotificationPage implements OnInit, OnDestroy {
 		this.notiSub = this.notificationService.AllNotification.subscribe(
 			notification => {
 				this.notifications = notification;
+
 				this.isLoading = false;
 			}
 		);

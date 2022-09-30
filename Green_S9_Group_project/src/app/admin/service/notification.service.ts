@@ -20,6 +20,7 @@ export class NotificationService {
 			.get<Notification>(
 				'http://localhost:5000/api/crop/Notification/notification' + id
 			)
+
 			.pipe(
 				take(1),
 				map(res => {
@@ -28,6 +29,7 @@ export class NotificationService {
 						message: res.data.message,
 						type: res.data.type,
 						date: res.data.date
+
 					};
 				})
 			);
@@ -43,6 +45,7 @@ export class NotificationService {
 				}),
 				tap(notifications => {
 					this._notification.next(notifications.filter(n=>n.notificationId !== id));
+
 				})
 			);
 	}
@@ -61,6 +64,7 @@ export class NotificationService {
 	// 		);
 	// }
 
+
 	createNotification(message: string, userId: string) {
 		const newNotification = {
 			message: message,
@@ -70,6 +74,7 @@ export class NotificationService {
 
 		return this.http
 			.post<any>('http://localhost:5000/api/Notification/create', newNotification)
+
 			.pipe(
 				take(1),
 				switchMap(res => {
@@ -94,6 +99,7 @@ export class NotificationService {
 						notifications.push({
 							notificationId: res[notification].id,
 							date:new Date( res[notification].date),
+
 							message: res[notification].message,
 							reply: res[notification].reply
 						});
@@ -121,6 +127,7 @@ export class NotificationService {
 						date: new Date(notification.date),
 						message: notification.message,
 						reply: notification.reply
+
 					});
 				}
 

@@ -31,11 +31,13 @@ export class AddDiseasePage implements OnInit, OnDestroy {
 	) {}
 
 	ngOnInit() {
+
 		this.paramSub = this.route.paramMap.subscribe(paramMap => {
 			if (!paramMap.has('cropId')) {
 				return;
 			}
 			this.isLoading = true;
+
 			this.cropSub = this.homeService
 				.getCrop(paramMap.get('cropId'))
 				.subscribe(crop => {
@@ -93,13 +95,12 @@ export class AddDiseasePage implements OnInit, OnDestroy {
           this.crop.name,
           'diseases'
         ]);
+
 		}
 
 		this.form.reset();
 	}
 
-
-		
 
 	ngOnDestroy(): void {
 		if (this.cropSub || this.paramSub) {

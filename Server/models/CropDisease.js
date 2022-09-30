@@ -11,6 +11,6 @@ const cropDiseaseSchema = new Schema({
 	remedyAction: { type: String, required: true }
 });
 
-cropDiseaseSchema.plugin(UniqueValidator); // to use unique value
+// cropDiseaseSchema.plugin(UniqueValidator); // to use unique value
 
 module.exports = mongoose.model('Disease', cropDiseaseSchema);

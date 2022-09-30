@@ -9,14 +9,14 @@ const createNotification = async (req, res, next) => {
 		throw new HttpError('Invalid inputs passed, please check your data.', 422);
 	}
 
-	console.log(req.body);
 	const newNotification = new Notification({
 		date: (new Date()).toISOString(),
+
 		userId: req.body.userId,
 		reply: req.body.reply,
 		message: req.body.message
 	});
-	console.log(newNotification);
+
 
 	try {
 		await newNotification.save();
@@ -96,6 +96,7 @@ const updateNotification = async (req, res, next) => {
 
 	const notificationId = req.params.notificationId;
 
+
 	let notification;
 	try {
 		notification = await Notification.findById(notificationId);
@@ -112,6 +113,7 @@ const updateNotification = async (req, res, next) => {
 	notification.userId = userId;
 	notification.reply = reply;
 
+
 	try {
 		await notification.save();
 	} catch (err) {
@@ -122,6 +124,7 @@ const updateNotification = async (req, res, next) => {
 		return next(error);
 	}
 
+
 	res
 		.status(201)
 		.json({ notification: notification.toObject({ getters: true }) });
@@ -129,7 +132,7 @@ const updateNotification = async (req, res, next) => {
 
 const deleteNotification = async (req, res, next) => {
 	const notificationId = req.params.notificationId;
-	console.log(notificationId);
+
 	let notification;
 	try {
 		notification = await Notification.findById(notificationId);
@@ -184,3 +187,4 @@ exports.getNotificationByUserId = getNotificationByUserId;
 exports.createNotification = createNotification;
 exports.updateNotification = updateNotification;
 exports.deleteNotification = deleteNotification;
+

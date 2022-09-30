@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import {
 	AnimationController,
+
 	LoadingController,
 	ModalController,
 	SegmentChangeEventDetail
@@ -25,6 +26,7 @@ export class CropTipsPage implements OnInit, OnDestroy {
 		private modelCtrl: ModalController,
 		private homeService: HomeService,
 		private route: ActivatedRoute
+
 	) {}
 
 	tipSub: Subscription;
@@ -33,6 +35,7 @@ export class CropTipsPage implements OnInit, OnDestroy {
 	crop: Crop;
 	isLoading = false;
 	cropSub: Subscription;
+
 
 	sowTips: CropTips[];
 	csowTips: CropTips[];
@@ -131,6 +134,7 @@ export class CropTipsPage implements OnInit, OnDestroy {
 			this.tipSub.unsubscribe();
 			this.cropSub.unsubscribe();
 			this.idSub.unsubscribe();
+
 		}
 	}
 }

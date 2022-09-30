@@ -20,7 +20,11 @@
     "@angular/platform-browser": "~13.2.2",
     "@angular/platform-browser-dynamic": "~13.2.2",
     "@angular/router": "~13.2.2",
+<<<<<<< HEAD
     "@capacitor/android": "4.1.0",
+=======
+    "@capacitor/android": "^4.1.0",
+>>>>>>> 6f34623c2b590c01196939ce213492730a46dcc3
     "@capacitor/app": "1.1.1",
     "@capacitor/core": "^3.7.0",
     "@capacitor/haptics": "1.1.4",
@@ -42,7 +46,12 @@
     "lodash-es": "^4.17.21",
     "mongoose-unique-validator": "^3.1.0",
     "mysql": "2.18.1",
+<<<<<<< HEAD
     "rxjs": "~6.6.0",
+=======
+    "ng2-search-filter": "^0.5.1",
+    "rxjs": "6.6.0",
+>>>>>>> 6f34623c2b590c01196939ce213492730a46dcc3
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
   },

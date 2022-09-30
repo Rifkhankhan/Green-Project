@@ -31,7 +31,10 @@ npm-debug.log*
 /plugins
 /www
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 node_modules 
 =======
 >>>>>>> main
+=======
+>>>>>>> 6f34623c2b590c01196939ce213492730a46dcc3

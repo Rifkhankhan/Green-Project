@@ -9,7 +9,7 @@ const MIME_TYPE_MAP = {
 const fileUpload = multer({
 	storage: multer.diskStorage({
 		destination: (req, file, cb) => {
-			cb(null, 'uploads/Diseases');
+			cb(null, 'uploads');
 		},
 
 		filename: (req, file, cb) => {

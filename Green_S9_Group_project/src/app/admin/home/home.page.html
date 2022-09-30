@@ -11,14 +11,15 @@
 
   <ion-grid>
     <ion-row class="weather-row">
-        
+
     </ion-row>
     <ion-row>
       <h2>Select Your Crops</h2>
     </ion-row>
-    
+
     <ion-row class="crop-card-row">
         <ion-col  size-sm="1" *ngFor="let crop of crops">
+
           <ion-card class="crop-card" [routerLink]="['/admin','tabs','home',crop.name]">
             <ion-img [src]="crop.img" ></ion-img>
             <ion-card-title>   {{crop.name}}</ion-card-title>

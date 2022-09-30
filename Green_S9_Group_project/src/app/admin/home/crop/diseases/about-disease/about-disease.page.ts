@@ -43,6 +43,7 @@ export class AboutDiseasePage implements OnInit,OnDestroy {
 
       this.diseaseSub = this.homeService.getDisease(paramMap.get('diseaseId')).subscribe(disease=>{
         this.disease = disease;
+
         this.disLoading = false
       })
     });

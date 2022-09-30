@@ -5,30 +5,32 @@
         [defaultHref]="['/dashboard','tabs','home',crop.name]"
       ></ion-back-button>
     </ion-buttons>
-    <ion-title>{{("Dashboard.CropTips.title."+crop.name) | translate}} </ion-title>
+    <ion-title>Green Live</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col class="img">
-        <ion-img [src]="crop.img"></ion-img>
-      </ion-col>
-    </ion-row>
+  <ion-row class="images">
+    <ion-col>
+      <h3>{{"Dashboard.Home.Crops."+crop.name | translate}}</h3>
+    </ion-col>
 
-    <ion-row>
-      <ion-col class="img">
-        <ion-list *ngFor="let saw of cropTips ">
-          <ion-card
-            [routerLink]="['/dashboard','tabs','home',crop.name,'crop-tips',saw.tipsId]"
-          >
-            <ion-card-content> {{saw.information}} </ion-card-content>
-          </ion-card>
-        </ion-list>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    <ion-col>
+      <ion-img [src]="crop.img"></ion-img>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col class="img">
+      <ion-list *ngFor="let saw of cropTips ">
+        <ion-card
+          [routerLink]="['/dashboard','tabs','home',crop.name,'crop-tips',saw.tipsId]"
+        >
+          <ion-card-content> {{saw.information}} </ion-card-content>
+        </ion-card>
+      </ion-list>
+    </ion-col>
+  </ion-row>
 
   <ion-grid *ngIf="isLoading">
     <ion-list-header>

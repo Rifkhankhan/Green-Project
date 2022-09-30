@@ -1,9 +1,12 @@
+
+
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import {
 	AlertController,
 	IonItemSliding,
 	LoadingController
+
 } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
@@ -19,11 +22,13 @@ export class NotificationPage implements OnInit, OnDestroy {
 		private notificationService: NotificationService,
 		private loadCtrl: LoadingController,
 		private alertCtrl: AlertController
+
 	) {}
 
 	notifications: Notification[];
 	notiSub: Subscription;
 	isLoading = false;
+
 	ngOnInit() {
 		this.isLoading = true;
 		this.notiSub = this.notificationService.AllNotification.subscribe(
@@ -32,6 +37,7 @@ export class NotificationPage implements OnInit, OnDestroy {
 				this.isLoading = false;
 			}
 		);
+
 	}
 
 	ionViewWillEnter() {
@@ -43,12 +49,14 @@ export class NotificationPage implements OnInit, OnDestroy {
 				this.notifications = notifications;
 				this.isLoading = false;
 			});
+
 	}
 
 	edit(id: string) {
 		console.log(id);
 	}
 	deleteSub: Subscription;
+
 
 	delete(id: string, item: IonItemSliding) {
 		this.alertCtrl
@@ -95,6 +103,7 @@ export class NotificationPage implements OnInit, OnDestroy {
 		if (this.notiSub || this.deleteSub) {
 			this.notiSub.unsubscribe;
 			this.deleteSub.unsubscribe;
+
 		}
 	}
 }

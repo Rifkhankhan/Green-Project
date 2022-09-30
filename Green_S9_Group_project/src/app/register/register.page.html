@@ -13,16 +13,8 @@
             <ion-item>
                 <img src="assets/logo.png" alt="logo.png">
             </ion-item>
-
             <ion-item>
               <ion-input type="text" required  name="username" lines="none" ngModel #username="ngModel" placeholder="User Name"></ion-input>
-            </ion-item>
-            <ion-item *ngIf="!username.valid && username.touched" lines="none">
-              <p>Please Enter the User Name</p>
-            </ion-item>
-
-            <ion-item>
-              <ion-input type="text" required  name="yourname" lines="none" ngModel #yourname="ngModel" placeholder="Your Name"></ion-input>
             </ion-item>
             <ion-item *ngIf="!yourname.valid && yourname.touched" lines="none">
               <p>Please Enter the Your Name</p>

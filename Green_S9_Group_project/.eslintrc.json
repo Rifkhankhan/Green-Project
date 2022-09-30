@@ -5,7 +5,11 @@
     {
       "files": ["*.ts"],
       "parserOptions": {
+<<<<<<< HEAD
         "project": ["tsconfig.json", "e2e/tsconfig.json"],
+=======
+        "project": ["GROUP_S9_GO-GREEN/tsconfig.json", "e2e/tsconfig.json"],
+>>>>>>> 6f34623c2b590c01196939ce213492730a46dcc3
         "createDefaultProgram": true
       },
       "extends": [

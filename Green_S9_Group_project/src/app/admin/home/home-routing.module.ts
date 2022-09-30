@@ -11,6 +11,7 @@ const routes: Routes = [
   {
     path: 'crop',
     loadChildren: () => import('./crop/crop.module').then( m => m.CropPageModule)
+
   }
 ];
 

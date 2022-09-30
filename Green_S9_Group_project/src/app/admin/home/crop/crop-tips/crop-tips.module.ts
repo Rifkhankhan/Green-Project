@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+
 import { IonicModule } from '@ionic/angular';
 
 import { CropTipsPageRoutingModule } from './crop-tips-routing.module';
@@ -14,6 +15,7 @@ import { CropTipsPage } from './crop-tips.page';
     FormsModule,
     IonicModule,
     CropTipsPageRoutingModule
+
   ],
   declarations: [CropTipsPage]
 })

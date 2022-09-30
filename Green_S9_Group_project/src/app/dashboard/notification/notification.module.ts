@@ -1,3 +1,4 @@
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -15,7 +16,9 @@ import { NotificationPage } from './notification.page';
     FormsModule,
     IonicModule,
     NotificationPageRoutingModule,
-    TranslateModule
+    TranslateModule,
+    Ng2SearchPipeModule
+
   ],
   declarations: [NotificationPage]
 })

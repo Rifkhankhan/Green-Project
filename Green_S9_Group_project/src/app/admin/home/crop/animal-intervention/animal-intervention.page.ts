@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AnimationController, LoadingController, ModalController } from '@ionic/angular';
+
 import { Subscription } from 'rxjs';
 import { CropTips } from 'src/app/admin/models/croptips.models';
 import { HomeService } from 'src/app/admin/service/home.service';
@@ -68,5 +69,6 @@ export class AnimalInterventionPage implements OnInit {
       this.paramSub.unsubscribe()
     }
   }
+
 
 }

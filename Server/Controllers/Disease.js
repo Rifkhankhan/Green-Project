@@ -16,7 +16,7 @@ const createDisease = async (req, res, next) => {
 		about: req.body.aboutDisease,
 		cropName: req.body.cropName,
 		diseaseName: req.body.diseaseName,
-		image: url + '/uploads/Diseases/' + req.file.filename,
+		image: url + '/uploads/' + req.file.filename,
 
 		remedyAction: req.body.remedyAction
 	});

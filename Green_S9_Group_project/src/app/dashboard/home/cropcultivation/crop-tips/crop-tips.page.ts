@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CropTips } from 'src/app/admin/models/croptips.models';
 import { Crop } from 'src/app/models/crop.model';
-import { HomeService } from '../../../../admin/service/home.service';
+import { HomeService } from '../../HomeServices/home.service';
 
 @Component({
 	selector: 'app-crop-tips',
@@ -23,6 +23,8 @@ export class CropTipsPage implements OnInit, OnDestroy {
 	cropTips: CropTips[];
 	isLoading = false;
 	ngOnInit() {
+		this.isLoading = true;
+
 		this.paraSub = this.route.paramMap.subscribe(paramMap => {
 			if (!paramMap.has('cropId')) {
 				return;
@@ -37,15 +39,30 @@ export class CropTipsPage implements OnInit, OnDestroy {
 
 		this.cropSub = this.homeService.AllcropTips.subscribe(cropTips => {
 			this.cropTips = cropTips;
+			this.isLoading = false;
 		});
 	}
 
 	ionViewWillEnter() {
 		this.isLoading = true;
+
+		this.paraSub = this.route.paramMap.subscribe(paramMap => {
+			if (!paramMap.has('cropId')) {
+				return;
+			}
+
+			this.cropidSub = this.homeService
+				.getCrop(paramMap.get('cropId'))
+				.subscribe(crop => {
+					this.crop = crop;
+				});
+		});
+
 		this.cropSub = this.homeService
 			.fetchAlltips(this.crop.name)
-			.subscribe(tips => {
-				this.cropTips = tips;
+			.subscribe(cropTips => {
+				this.cropTips = cropTips;
+
 				this.isLoading = false;
 			});
 	}

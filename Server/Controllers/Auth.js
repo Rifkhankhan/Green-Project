@@ -1,6 +1,7 @@
 const HttpError = require('../models/http-error');
 const { validationResult } = require('express-validator');
 const User = require('../models/User');
+const Zone = require('../models/Zone');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -121,17 +122,113 @@ const signIn = async (req, res, next) => {
 	}
 
 	res.status(200).json({
-		message: 'SignIn',
+		message: 'SignIn Successfully',
 		data: {
 			userId: identifyUser.id,
 			username: identifyUser.username,
 			token: token,
 			role: identifyUser.role,
 			expiresIn: '1h'
-
 		}
 	});
 };
 
+const updatePassword = async (req, res, next) => {
+	const errors = validationResult(req);
+
+	if (!errors.isEmpty()) {
+		throw new HttpError('Invalid inputs passed, please check your data.', 422);
+		// return next(new HttpError('Invalid inputs passed, please check your data.', 422)); // batter to use this
+	}
+
+	const { currentPassword, newPassword, userId } = req.body;
+
+	let validCurrentPassword = false;
+	let user;
+
+	try {
+		user = await User.findById(userId);
+	} catch (err) {
+		const error = new HttpError('User is not there provided by the id', 500);
+		return next(error);
+	}
+	console.log(user);
+	try {
+		validCurrentPassword = await bcrypt.compare(currentPassword, user.password);
+		console.log(validCurrentPassword);
+	} catch (err) {
+		const error = new HttpError('Something went Wrong in Comparing', 500);
+		return next(error);
+	}
+
+	console.log(validCurrentPassword);
+	if (!validCurrentPassword) {
+		res;
+	}
+	let hasNewPassword;
+	try {
+		hasNewPassword = await bcrypt.hash(newPassword, 12);
+	} catch (err) {
+		const error = new HttpError('User is not there provided by the id', 500);
+		return next(error);
+	}
+
+	user.password = hasNewPassword;
+
+	try {
+		await user.save();
+	} catch (err) {
+		const error = new HttpError('Updated Password is not saved ', 500);
+		return next(error);
+	}
+
+	res.status(200).json({
+		message: 'Updated Password Successfully',
+		user: user.toObject({ getters: true })
+	});
+};
+
+const addZone = async (req, res, next) => {
+	const errors = validationResult(req);
+
+	if (!errors.isEmpty()) {
+		throw new HttpError('Invalid inputs passed, please check your data.', 422);
+		// return next(new HttpError('Invalid inputs passed, please check your data.', 422)); // batter to use this
+	}
+	const { zoneEnglish, zoneTamil } = req.body;
+
+	const newZone = new Zone({
+		zoneEnglish: zoneEnglish,
+		zoneTamil: zoneTamil
+	});
+	try {
+		await newZone.save();
+	} catch (err) {
+		const error = new HttpError('Creating Zone failed,try again', 500);
+		return next(error);
+	}
+	res.json({ zone: newZone.toObject({ getters: true }) });
+};
+
+const getZones = async (req, res, next) => {
+	const errors = validationResult(req);
+
+	if (!errors.isEmpty()) {
+		throw new HttpError('Invalid inputs passed, please check your data.', 422);
+	}
+
+	let zones;
+	try {
+		zones = await Zone.find();
+	} catch (err) {
+		const error = new HttpError('Creating Notification failed,try again', 500);
+		return next(error);
+	}
+	res.json({ zones: zones.map((zone) => zone.toObject({ getters: true })) });
+};
+
+exports.getZones = getZones;
+exports.addZone = addZone;
+exports.updatePassword = updatePassword;
 exports.signUp = signUp;
 exports.signIn = signIn;

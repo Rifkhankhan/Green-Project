@@ -16,10 +16,12 @@ export class HomeService {
 	private _croptips = new BehaviorSubject([]);
 	private _cropdiseases = new BehaviorSubject([]);
 
+
 	private _crops = new BehaviorSubject<Crop[]>([
 		{
 			name: 'Onion',
 			img: 'assets/project_images/onion.jfif'
+
 		},
 		{
 			name: 'Carrot',
@@ -32,6 +34,7 @@ export class HomeService {
 		{
 			name: 'Pottato',
 			img: 'assets/project_images/pottato.jfif'
+
 		},
 		{
 			name: 'Turmeric',
@@ -40,6 +43,7 @@ export class HomeService {
 		{
 			name: 'Paddy',
 			img: 'assets/project_images/paddy.jpg'
+
 		}
 	]);
 
@@ -54,6 +58,7 @@ export class HomeService {
 	get AllDiseases() {
 		return this._cropdiseases.asObservable();
 	}
+
 
 	fetchAlltips(name: string) {
 		return this.http
@@ -191,6 +196,7 @@ export class HomeService {
 						diseaseId: data.id,
 						diseaseName: data.diseaseName,
 						aboutDisease: data.aboutDisease,
+
 						cropName: data.cropName,
 						remedyAction: data.remedyAction,
 						image: data.image
@@ -365,4 +371,5 @@ export class HomeService {
 			})
 		);
 	}
+
 }

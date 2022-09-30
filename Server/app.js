@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -13,6 +14,7 @@ var createError = require('http-errors');
 // var logger = require('morgan');
 
 // npm install --save multer // for file upload
+
 const app = express();
 
 const adminRouter = require('./routes/Admin');
@@ -21,6 +23,7 @@ const notificationRouter = require('./routes/Notification');
 const userRouter = require('./routes/users');
 
 app.use(bodyParser.json()); // to get body ,this should be used before routers
+
 
 // CORS Headers => Required for cross-origin/ cross-server communication
 app.use((req, res, next) => {
@@ -44,6 +47,7 @@ app.use('/api/GreenLive', authRouter);
 app.use('/api/Notification', notificationRouter);
 app.use('/api/user', userRouter);
 
+
 // for unsupported router error handler
 app.use((req, res, next) => {
 	const error = new HttpError('could not find this route..');
@@ -66,6 +70,7 @@ mongoose
 		'mongodb+srv://projectgreen:projectgreen152@projectgreen.t8h1b7r.mongodb.net/?retryWrites=true&w=majority'
 		// { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
 	)
+
 	.then(() => {
 		console.log('connected to Database');
 		app.listen(5000); // start Node + Express server on port 5000
@@ -73,13 +78,16 @@ mongoose
 	.catch((error) => {
 		console.log(error);
 	});
+
 app.use(
 	bodyParser.urlencoded({
 		extended: false
 	})
 );
+
 app.use('/uploads', express.static(path.join('Server/uploads')));
 app.use(
 	'/uploads/Diseases',
 	express.static(path.join('Server/uploads/Diseases'))
 );
+

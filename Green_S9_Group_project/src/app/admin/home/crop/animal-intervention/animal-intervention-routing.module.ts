@@ -11,6 +11,7 @@ const routes: Routes = [
   {
     path: 'add-intervention',
     loadChildren: () => import('./add-intervention/add-intervention.module').then( m => m.AddInterventionPageModule)
+
   }
 ];
 

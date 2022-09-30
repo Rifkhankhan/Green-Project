@@ -25,6 +25,7 @@ export class ShowTipPage implements OnInit, OnDestroy {
 		private route: ActivatedRoute,
 		private router: Router,
 		private alertCtrl: AlertController
+
 	) {}
 
 	tipidSub: Subscription;
@@ -140,6 +141,7 @@ export class ShowTipPage implements OnInit, OnDestroy {
 			this.cropTipSub.unsubscribe();
 			this.tipidSub.unsubscribe();
 			this.deletSub.unsubscribe();
+
 		}
 	}
 }
